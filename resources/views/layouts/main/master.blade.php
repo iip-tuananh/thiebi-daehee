@@ -1,195 +1,399 @@
 <!DOCTYPE html>
-<html lang="vi">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>@yield('title')</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="@yield('title')" />
-    <meta name="robots" content="noodp,index,follow" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="description" content="@yield('description')" />
-    <link rel="canonical" href="{{ url()->current() }}" />
-    <meta property="og:locale" content="vi_VN" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="@yield('title')" />
-    <meta property="og:description" content="@yield('description')" />
-    <meta property="og:url" content="{{ url()->current() }}" />
-    <meta property="og:site_name" content="{{ url()->current() }}" />
-    <meta property="og:updated_time" content="2021-08-28T22:06:30+07:00" />
-    <meta property="og:image" content="@yield('image')" />
-    <meta property="og:image:secure_url" content="@yield('image')" />
-    <meta property="og:image:width" content="598" />
-    <meta property="og:image:height" content="333" />
-    <meta property="og:image:alt" content="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@yield('title')" />
-    <meta name="twitter:description" content="@yield('description')" />
-    <meta name="twitter:image" content="@yield('image')" />
-    <!-- Fav Icon -->
-    <link rel="icon" href="{{ url('' . $setting->favicon) }}" type="image/x-icon">
-    <link rel="preload" as="script" href="{{ asset('frontend/js/jquery.js') }}" />
-    <script src="{{ asset('frontend/js/jquery.js') }}" type="text/javascript"></script>
-    <link rel="preload" as="script" href="{{ asset('frontend/js/cookie.js') }}" />
-    <script src="{{ asset('frontend/js/cookie.js') }}" type="text/javascript"></script>
-    <link rel="preload" as="script" href="{{ asset('frontend/js/swiper.js') }}" />
-    <script src="{{ asset('frontend/js/swiper.js') }}" type="text/javascript"></script>
-    <link rel="preload" as="script" href="{{ asset('frontend/js/lazy.js') }}" />
-    <script src="{{ asset('frontend/js/lazy.js') }}" type="text/javascript"></script>
-    <link rel="preload" href="{{ asset('frontend/css/main.scss.css') }}">
-    <link rel="preload" as='style' type="text/css" href="{{ asset('frontend/css/index.scss.css') }}">
-    <link rel="preload" as='style' type="text/css" href="{{ asset('frontend/css/404page.scss.css') }}">
-    <link rel="preload" as='style' type="text/css" href="{{ asset('frontend/css/bootstrap-4-3-min.css') }}">
-    <link rel="preload" as='style' type="text/css" href="{{ asset('frontend/css/quickviews_popup_cart.scss.css') }}">
-    @yield('css')
-    <style>
-        :root {
-            --mainColor: #ff5c00;
-            --textColor: #231f20;
-        }
-    </style>
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-4-3-min.css') }}">
-    <link href="{{ asset('frontend/css/main.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link rel="preload" as='style' type="text/css"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
-    <link href="{{ asset('frontend/css/font.scss.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('frontend/css/index.scss.cs') }}s" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('frontend/css/quickviews_po') }}pup_cart.scss.css" rel="stylesheet" type="text/css"
-        media="all" />
-    <style>
-        :root {
-            --gradient1: #eb3349;
-            --gradient1_2: #f45c43;
-            --gradient3: #092477;
-            --gradient4: #3a529b;
-            --pricecolor: #ff5c00;
-        }
-    </style>
-    <script>
-        $(document).ready(function($) {
-            awe_lazyloadImage();
-        });
-
-        function awe_lazyloadImage() {
-            var ll = new LazyLoad({
-                elements_selector: ".lazyload",
-                load_delay: 100,
-                threshold: 0
-            });
-        }
-        window.awe_lazyloadImage = awe_lazyloadImage;
-    </script>
-    <script>
-        const io = new IntersectionObserver((e, t) => {
-                e.forEach(e => {
-                    e.isIntersecting && (e.target.src = e.target.dataset.src, e.target.classList.add("loaded"),
-                        t.unobserve(e.target))
-                })
-            }),
-            bo = new IntersectionObserver((e, t) => {
-                e.forEach(e => {
-                    if (e.isIntersecting) {
-                        const r = e.target;
-                        r.style.backgroundImage = r.dataset.background, e.target.classList.add("loaded"), t
-                            .unobserve(e.target)
-                    }
-                })
-            });
-        document.addEventListener("DOMContentLoaded", function() {
-            const arr = document.querySelectorAll('.lazy')
-            arr.forEach((v) => {
-                io.observe(v);
-            })
-            const arrBg = document.querySelectorAll('.lazy_bg')
-            arrBg.forEach((v) => {
-                bo.observe(v);
-            })
-        })
-    </script>
-</head>
-
-<body>
-    <div class="opacity_menu"></div>
-    @include('layouts.header.index')
-    @yield('content')
-    @include('layouts.footer.index')
-    <a href="javascript:;" title="So sánh" class="btn-show-popup-compare icon-ss-mb d-lg-none">
-        <svg x="0" y="0" viewBox="0 0 459 459.648" style="enable-background:new 0 0 512 512">
-            <path xmlns="http://www.w3.org/2000/svg"
-                d="m416.324219 293.824219c0 26.507812-21.492188 48-48 48h-313.375l63.199219-63.199219-22.625-22.625-90.511719 90.511719c-6.246094 6.25-6.246094 16.375 0 22.625l90.511719 90.511719 22.625-22.625-63.199219-63.199219h313.375c44.160156-.054688 79.945312-35.839844 80-80v-64h-32zm0 0"
-                fill="#7B7B7B" data-original="#000000" style=""></path>
-            <path xmlns="http://www.w3.org/2000/svg"
-                d="m32.324219 165.824219c0-26.511719 21.488281-48 48-48h313.375l-63.199219 63.199219 22.625 22.625 90.511719-90.511719c6.246093-6.25 6.246093-16.375 0-22.625l-90.511719-90.511719-22.625 22.625 63.199219 63.199219h-313.375c-44.160157.050781-79.949219 35.839843-80 80v64h32zm0 0"
-                fill="#7B7B7B" data-original="#000000" style=""></path>
-        </svg>
-    </a>
-    <a href="#" class="backtop" title="Lên đầu trang">
-        <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-up" role="img"
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-angle-up fa-w-10">
-            <path fill="currentColor"
-                d="M168.5 164.2l148 146.8c4.7 4.7 4.7 12.3 0 17l-19.8 19.8c-4.7 4.7-12.3 4.7-17 0L160 229.3 40.3 347.8c-4.7 4.7-12.3 4.7-17 0L3.5 328c-4.7-4.7-4.7-12.3 0-17l148-146.8c4.7-4.7 12.3-4.7 17 0z"
-                class=""></path>
-        </svg>
-    </a>
-    <link rel="preload" as="style" href="{{ asset('frontend/css/ajaxcart.scss.css') }}" type="text/css">
-    <link href="{{ asset('frontend/css/ajaxcart.scss.css') }}" rel="stylesheet" type="text/css"
-        media="all" />
-    <div class="backdrop__body-backdrop___1rvky"></div>
-    <div id="popup-cart-desktop" class="popup-cart">
-    </div>
-    <div id="popup-cart-mobile" class="popup-cart-mobile">
-        <div class="header-popcart">
-            <div class="top-cart-header">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="682.66669pt"
-                        viewBox="-21 -21 682.66669 682.66669" width="682.66669pt">
-                        <path
-                            d="m322.820312 387.933594 279.949219-307.273438 36.957031 33.671875-314.339843 345.023438-171.363281-162.902344 34.453124-36.238281zm297.492188-178.867188-38.988281 42.929688c5.660156 21.734375 8.675781 44.523437 8.675781 68.003906 0 148.875-121.125 270-270 270s-270-121.125-270-270 121.125-270 270-270c68.96875 0 131.96875 26.007812 179.746094 68.710938l33.707031-37.113282c-58.761719-52.738281-133.886719-81.597656-213.453125-81.597656-85.472656 0-165.835938 33.285156-226.273438 93.726562-60.441406 60.4375-93.726562 140.800782-93.726562 226.273438s33.285156 165.835938 93.726562 226.273438c60.4375 60.441406 140.800782 93.726562 226.273438 93.726562s165.835938-33.285156 226.273438-93.726562c60.441406-60.4375 93.726562-140.800782 93.726562-226.273438 0-38.46875-6.761719-75.890625-19.6875-110.933594zm0 0" />
-                    </svg>
-                    Mua hàng thành công
-                </span>
+<!--[if IE 9 ]> 
+<html lang="vi" prefix="og: https://ogp.me/ns#" class="ie9 loading-site no-js">
+   <![endif]-->
+   <!--[if IE 8 ]> 
+   <html lang="vi" prefix="og: https://ogp.me/ns#" class="ie8 loading-site no-js">
+      <![endif]-->
+      <!--[if (gte IE 9)|!(IE)]><!-->
+      <html lang="vi" prefix="og: https://ogp.me/ns#" class="loading-site no-js">
+         <!--<![endif]-->
+         <head>
+            <meta charset="UTF-8" />
+            <script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+         
+            <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Quicksand%3Aregular%2C700%7CRoboto%3Aregular%2Cregular%2C700%2Cregular&#038;display=swap" />
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand%3Aregular%2C700%7CRoboto%3Aregular%2Cregular%2C700%2Cregular&#038;display=swap" media="print" onload="this.media='all'" />
+            <noscript>
+               <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand%3Aregular%2C700%7CRoboto%3Aregular%2Cregular%2C700%2Cregular&#038;display=swap" />
+            </noscript>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+            <title>@yield('title')</title>
+            <meta name="description" content="">
+            <meta name="keywords" content="@yield('title')" />
+            <meta name="robots" content="noodp,index,follow" />
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+            <meta name="csrf-token" content="{{ csrf_token() }}" />
+            <meta name="description" content="@yield('description')" />
+            <link rel="canonical" href="{{ url()->current() }}" />
+            <meta property="og:locale" content="vi_VN" />
+            <meta property="og:type" content="article" />
+            <meta property="og:title" content="@yield('title')" />
+            <meta property="og:description" content="@yield('description')" />
+            <meta property="og:url" content="{{ url()->current() }}" />
+            <meta property="og:site_name" content="{{ url()->current() }}" />
+            <meta property="og:updated_time" content="2021-08-28T22:06:30+07:00" />
+            <meta property="og:image" content="@yield('image')" />
+            <meta property="og:image:secure_url" content="@yield('image')" />
+            <meta property="og:image:width" content="598" />
+            <meta property="og:image:height" content="333" />
+            <meta property="og:image:alt" content="" />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="@yield('title')" />
+            <meta name="twitter:description" content="@yield('description')" />
+            <meta name="twitter:image" content="@yield('image')" />
+            <!-- Fav Icon -->
+            <link rel="icon" href="{{ url('' . $setting->favicon) }}" type="image/x-icon">
+            <!-- /Rank Math WordPress SEO plugin -->
+            <link rel="prefetch" href="{{asset('frontend/js/chunk.countup.fe2c1016.js')}}" />
+            <link rel="prefetch" href="{{asset('frontend/js/chunk.sticky-sidebar.a58a6557.js')}}" />
+            <link rel="prefetch" href="{{asset('frontend/js/chunk.tooltips.29144c1c.js')}}" />
+            <link rel="prefetch" href="{{asset('frontend/js/chunk.vendors-popups.947eca5c.js')}}" />
+            <link rel="prefetch" href="{{asset('frontend/js/chunk.vendors-slider.f0d2cbc9.js')}}" />
+            <style id='wp-block-library-inline-css' type='text/css'>
+               :root{--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,161;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip:auto!important;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}figure{margin:0 0 1em}
+            </style>
+            <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('frontend/css/classic-themes.min.css')}}' type='text/css' media='all' />
+            <link rel='stylesheet' id='contact-form-7-css' href='{{asset('frontend/css/styles.css')}}' type='text/css' media='all' />
+            <link rel='stylesheet' id='flatsome-main-css' href='{{asset('frontend/css/flatsome.css')}}' type='text/css' media='all' />
+            <style id='flatsome-main-inline-css' type='text/css'>
+               @font-face {
+               font-family: "fl-icons";
+               font-display: block;
+               src:
+               url(https://smarthomehp.vn/wp-content/themes/flatsome/assets/css/icons/fl-icons.eot#iefix?v=3.15.6) format("embedded-opentype"),
+               url({{asset('frontend/fonts/fl-icons.woff2')}}) format("woff2"),
+               url(https://smarthomehp.vn/wp-content/themes/flatsome/assets/css/icons/fl-icons.ttf?v=3.15.6) format("truetype"),
+               url({{asset('frontend/fonts/fl-icons.woff')}}) format("woff"),
+               url(https://smarthomehp.vn/wp-content/themes/flatsome/assets/css/icons/fl-icons.svg?v=3.15.6#fl-icons) format("svg");
+               }
+            </style>
+            <link rel='stylesheet' id='select2-css' href='{{asset('frontend/css/select2.css')}}' type='text/css' media='all' />
+            <link rel='stylesheet' id='flatsome-shop-css' href='{{asset('frontend/css/flatsome-shop.css')}}' type='text/css' media='all' />
+            <link rel='stylesheet' id='flatsome-style-css' href='{{asset('frontend/css/style.css')}}' type='text/css' media='all' />
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/jquery.min.js')}}' id='jquery-core-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/jquery-migrate.min.js')}}' id='jquery-migrate-js'></script>
+           
+            {{-- <link rel="stylesheet" href="{{asset('frontend/css/slick-theme.scss')}}">
+            <link rel="stylesheet" href="{{asset('frontend/css/slick-theme.css')}}">
+            <link rel="stylesheet" href="{{asset('frontend/css/slick.css')}}"> --}}
+            
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+            {{-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/> --}}
+            @yield('css')
+      
+            <!--[if IE]><script>var head = document.getElementsByTagName('head')[0],style = document.createElement('style');style.type = 'text/css';style.styleSheet.cssText = ':before,:after{content:none !important';head.appendChild(style);setTimeout(function(){head.removeChild(style);}, 0);</script><script src="https://smarthomehp.vn/wp-content/themes/flatsome/assets/libs/ie-flexibility.js"></script><![endif]-->
+            <noscript>
+               <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
+            </noscript>
+            <link rel="stylesheet" href="{{asset('frontend/css/main.css')}}">
+            <link rel="icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-32x32.png" sizes="32x32" />
+            <link rel="icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-192x192.png" sizes="192x192" />
+            <link rel="apple-touch-icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-180x180.png" />
+            <meta name="msapplication-TileImage" content="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-270x270.png" />
+            <style id="custom-css" type="text/css">:root {--primary-color: #78b82a;}.container-width, .full-width .ubermenu-nav, .container, .row{max-width: 1170px}.row.row-collapse{max-width: 1140px}.row.row-small{max-width: 1162.5px}.row.row-large{max-width: 1200px}.header-main{height: 75px}#logo img{max-height: 75px}#logo{width:300px;}#logo img{padding:10px 0;}.header-bottom{min-height: 52px}.header-top{min-height: 30px}.transparent .header-main{height: 90px}.transparent #logo img{max-height: 90px}.has-transparent + .page-title:first-of-type,.has-transparent + #main > .page-title,.has-transparent + #main > div > .page-title,.has-transparent + #main .page-header-wrapper:first-of-type .page-title{padding-top: 140px;}.header.show-on-scroll,.stuck .header-main{height:70px!important}.stuck #logo img{max-height: 70px!important}.search-form{ width: 10%;}.header-bottom {background-color: #1c3c5a}.stuck .header-main .nav > li > a{line-height: 50px }.header-bottom-nav > li > a{line-height: 25px }@media (max-width: 549px) {.header-main{height: 70px}#logo img{max-height: 70px}}/* Color */.accordion-title.active, .has-icon-bg .icon .icon-inner,.logo a, .primary.is-underline, .primary.is-link, .badge-outline .badge-inner, .nav-outline > li.active> a,.nav-outline >li.active > a, .cart-icon strong,[data-color='primary'], .is-outline.primary{color: #78b82a;}/* Color !important */[data-text-color="primary"]{color: #78b82a!important;}/* Background Color */[data-text-bg="primary"]{background-color: #78b82a;}/* Background */.scroll-to-bullets a,.featured-title, .label-new.menu-item > a:after, .nav-pagination > li > .current,.nav-pagination > li > span:hover,.nav-pagination > li > a:hover,.has-hover:hover .badge-outline .badge-inner,button[type="submit"], .button.wc-forward:not(.checkout):not(.checkout-button), .button.submit-button, .button.primary:not(.is-outline),.featured-table .title,.is-outline:hover, .has-icon:hover .icon-label,.nav-dropdown-bold .nav-column li > a:hover, .nav-dropdown.nav-dropdown-bold > li > a:hover, .nav-dropdown-bold.dark .nav-column li > a:hover, .nav-dropdown.nav-dropdown-bold.dark > li > a:hover, .header-vertical-menu__opener ,.is-outline:hover, .tagcloud a:hover,.grid-tools a, input[type='submit']:not(.is-form), .box-badge:hover .box-text, input.button.alt,.nav-box > li > a:hover,.nav-box > li.active > a,.nav-pills > li.active > a ,.current-dropdown .cart-icon strong, .cart-icon:hover strong, .nav-line-bottom > li > a:before, .nav-line-grow > li > a:before, .nav-line > li > a:before,.banner, .header-top, .slider-nav-circle .flickity-prev-next-button:hover svg, .slider-nav-circle .flickity-prev-next-button:hover .arrow, .primary.is-outline:hover, .button.primary:not(.is-outline), input[type='submit'].primary, input[type='submit'].primary, input[type='reset'].button, input[type='button'].primary, .badge-inner{background-color: #78b82a;}/* Border */.nav-vertical.nav-tabs > li.active > a,.scroll-to-bullets a.active,.nav-pagination > li > .current,.nav-pagination > li > span:hover,.nav-pagination > li > a:hover,.has-hover:hover .badge-outline .badge-inner,.accordion-title.active,.featured-table,.is-outline:hover, .tagcloud a:hover,blockquote, .has-border, .cart-icon strong:after,.cart-icon strong,.blockUI:before, .processing:before,.loading-spin, .slider-nav-circle .flickity-prev-next-button:hover svg, .slider-nav-circle .flickity-prev-next-button:hover .arrow, .primary.is-outline:hover{border-color: #78b82a}.nav-tabs > li.active > a{border-top-color: #78b82a}.widget_shopping_cart_content .blockUI.blockOverlay:before { border-left-color: #78b82a }.woocommerce-checkout-review-order .blockUI.blockOverlay:before { border-left-color: #78b82a }/* Fill */.slider .flickity-prev-next-button:hover svg,.slider .flickity-prev-next-button:hover .arrow{fill: #78b82a;}/* Background Color */[data-icon-label]:after, .secondary.is-underline:hover,.secondary.is-outline:hover,.icon-label,.button.secondary:not(.is-outline),.button.alt:not(.is-outline), .badge-inner.on-sale, .button.checkout, .single_add_to_cart_button, .current .breadcrumb-step{ background-color:#c0613c; }[data-text-bg="secondary"]{background-color: #c0613c;}/* Color */.secondary.is-underline,.secondary.is-link, .secondary.is-outline,.stars a.active, .star-rating:before, .woocommerce-page .star-rating:before,.star-rating span:before, .color-secondary{color: #c0613c}/* Color !important */[data-text-color="secondary"]{color: #c0613c!important;}/* Border */.secondary.is-outline:hover{border-color:#c0613c}body{font-size: 100%;}@media screen and (max-width: 549px){body{font-size: 100%;}}body{font-family:"Roboto", sans-serif}body{font-weight: 0}body{color: #000000}.nav > li > a {font-family:"Roboto", sans-serif;}.mobile-sidebar-levels-2 .nav > li > ul > li > a {font-family:"Roboto", sans-serif;}.nav > li > a {font-weight: 700;}.mobile-sidebar-levels-2 .nav > li > ul > li > a {font-weight: 700;}h1,h2,h3,h4,h5,h6,.heading-font, .off-canvas-center .nav-sidebar.nav-vertical > li > a{font-family: "Quicksand", sans-serif;}h1,h2,h3,h4,h5,h6,.heading-font,.banner h1,.banner h2{font-weight: 700;}h1,h2,h3,h4,h5,h6,.heading-font{color: #000000;}.breadcrumbs{text-transform: none;}.alt-font{font-family: "Roboto", sans-serif;}.alt-font{font-weight: 0!important;}.header:not(.transparent) .header-bottom-nav.nav > li > a{color: #ffffff;}.header:not(.transparent) .header-bottom-nav.nav > li > a:hover,.header:not(.transparent) .header-bottom-nav.nav > li.active > a,.header:not(.transparent) .header-bottom-nav.nav > li.current > a,.header:not(.transparent) .header-bottom-nav.nav > li > a.active,.header:not(.transparent) .header-bottom-nav.nav > li > a.current{color: #2e63a3;}.header-bottom-nav.nav-line-bottom > li > a:before,.header-bottom-nav.nav-line-grow > li > a:before,.header-bottom-nav.nav-line > li > a:before,.header-bottom-nav.nav-box > li > a:hover,.header-bottom-nav.nav-box > li.active > a,.header-bottom-nav.nav-pills > li > a:hover,.header-bottom-nav.nav-pills > li.active > a{color:#FFF!important;background-color: #2e63a3;}a{color: #000000;}a:hover{color: #78b82a;}.tagcloud a:hover{border-color: #78b82a;background-color: #78b82a;}.current .breadcrumb-step, [data-icon-label]:after, .button#place_order,.button.checkout,.checkout-button,.single_add_to_cart_button.button{background-color: #78b82a!important }@media screen and (min-width: 550px){.products .box-vertical .box-image{min-width: 300px!important;width: 300px!important;}}/* Custom CSS */.section1,.section3,.section4,.footer-section{padding-bottom: 0px !important;}.footer-section .ux-logo-link{padding: 0px !important;}.footer-section ul{margin-bottom : 0px;}.footer-section h3{font-size: 16px;color: #fff;text-transform: uppercase;position: relative;padding-bottom: 5px;border-bottom: 2px solid #01447a;}.footer-section ul li {list-style : none;border-bottom: 1px solid #262c44;padding: 6px 0;margin-bottom : 0px;margin-left : 0px;background: url(/frontend/img/right-chevron.png) no-repeat left;background-size: 10px;padding-left: 15px;}.footer-section a:hover{color : #01447a;}.footer-section p{margin-bottom : 5px;}.footer-section .cot4 .social-icons{margin-top: 6px;}.footer-section .cot4 .social-icons a{border-color: #222636 !important;background: #222636;color: #eee;margin-right: 8px;}.absolute-footer{background-color: #101522;color: #fff !important;padding: 10px 0;}.contact-header .col.large-4{padding-bottom: 0px;}.contact-header .icon-box-text{align-self: center;padding-left: 10px !important;} .contact-header .icon-box-text a{color: #9966ff;font-weight: bold;}.contact-header .icon-box-text p{font-size: 14px;}.header-bottom-nav.nav-left>li{margin: 0px;line-height: 52px;}.header-bottom-nav.nav-left > li.menu-item:hover,.header-bottom-nav.nav-left > li.menu-item.active,.header-bottom-nav.nav-left > li.menu-item.current{background: #ffffffd1;}.header-bottom-nav > li > a {padding: 10px 15px;font-family: 'Quicksand';font-size: 14px;}.header-bottom-nav .header-search-form{margin-left: 20px !important;}.header-search-form-wrapper input[type='search']{box-shadow: none;border: none;border-radius: 5px 0 0 5px;}.header-search-form-wrapper button[type="submit"]{box-shadow: none;border: none;border-radius: 0 5px 5px 0;}.nav-dropdown-default {padding: 0;border: none;}.nav-dropdown.nav-dropdown-default>li>a {padding: 10px 5px 10px 10px;margin: 0px;}.nav-dropdown.nav-dropdown-default>li:hover{background: #01447a;}.nav-dropdown.nav-dropdown-default>li:hover a{color: #fff;}.nav-dropdown-has-arrow li.has-dropdown:after, .nav-dropdown-has-arrow li.has-dropdown:before{display: none;}.section0 .row1 .icon-box{padding: 5px;border: 1px dashed #01447a;border-radius: 10px;}.section0 .row1 .icon-box h3 {margin-bottom: 0px;font-size: 18px;color: #01447a;}.section0 .row1 .icon-box .icon-box-img{align-self: center;}.section0 .row1 .icon-box p{font-size: 15px;}.section0 .row1 .icon-box:hover{cursor: pointer;box-shadow: 2px 2px 6px #01447ad1;}.section2 .row1 .cot1 h2{padding-bottom: 30px;margin-bottom: 5px;color: #01447a;}.section2 .row1 .cot1 h2:after{content: ' ';position: absolute;top: 30px;left: 50%;height: 40px;width: 180px;border-radius: 4px;transform: translateX(-50%);background: url(frontend/img/heading-line-2.png);background-repeat: no-repeat;background-position: center;}.section1 .row2 .cot1 p,.section2 .row2 .cot1 p{font-size: 15px;margin-bottom: 0px;}.is-divider{display: none;}.section1 .icon-box{box-shadow: 0 0px 22px rgb(120 184 42 / 0.12);}.section1 .icon-box .icon-box-img{margin-bottom: 0px;}.section1 .icon-box .icon-box-img img{padding: 0;}.section1 .icon-box .icon-box-text{padding: 10px;}.section1 .icon-box .icon-box-text h3{font-size: 18px;}.section1 .icon-box .icon-box-text p{font-size: 15px;}.section1 .icon-box .icon-box-img:before {position: absolute;content: '';width: 100%;height: 100%;top: 0;left: 0;z-index: 1;transition: all 0.6s ease-in-out;}.section1 .icon-box .icon-box-img:after {position: absolute;content: '';width: 100%;height: 100%;top: 0;left: 0;transition: all 0.6s ease-in-out;}.section1 .icon-box .icon-box-img:hover:before {right: 50%;left: 50%;width: 0;background: rgba(255, 255, 255, 0.5);}.section1 .icon-box .icon-box-img:hover:after {height: 0;top: 50%;bottom: 50%;background: rgba(255, 255, 255, 0.5);}.product-small.box{transition-duration: 0.3s;transition-property: box-shadow, transform;box-shadow: 0 0px 22px rgb(1 68 122 / 0.22);}.product-small.box:hover{box-shadow: 0 0px 20px rgb(1 68 122 / 0.5);transform: scale(1.00);}.product-small.box p.product-title{font-weight: bold;font-size: 16px;}.section2 .flickity-prev-next-button{opacity: 1;}.section2 .flickity-prev-next-button.previous,.section2 .flickity-prev-next-button.next{transform: translateX(0%);}.header-pro {display: block;height: 30px;margin-bottom: 0px;}.section1 .header-pro{height: 10px;}.box-header {display: inline-block;position: absolute;line-height: 60px;margin-top: -55px;left: 50%;transform: translate(-50%);}.box-header:before, .box-header:after {content: "";position: absolute;z-index: 0;}.box-header:before {width: 0;height: 0;border-style: solid;border-width: 0 30px 25px 30px;border-color: transparent transparent #e8e8e8 transparent;top: 0;left: -45px;}.box-header:after {width: 0;height: 0;border-style: solid;border-width: 0 30px 25px 30px;border-color: transparent transparent #e8e8e8 transparent;top: 0;right: -45px;}.box-header h2.box-title {padding: 0 30px;margin: 0;font-weight: 700;color: #fff;font-size: 25px;background: #01447a;line-height: 60px;text-transform: uppercase;border-bottom-left-radius: 25px;border-bottom-right-radius: 25px;position: relative;z-index: 1;max-width: 500px;width: max-content;}.box-header h2.box-title:before, .box-header h2.box-title:after {content: "";position: absolute;}.box-header h2.box-title:before {width: 0;height: 0;border-style: solid;border-width: 0 17px 46px 0;border-color: transparent #01447a transparent transparent;left: -15px;top: 0;}.box-header h2.box-title:after {width: 0;height: 0;border-style: solid;border-width: 46px 17px 0 0;border-color: #01447a transparent transparent transparent;right: -15px;top: 0;}.section .tabbed-content ul li a{margin: 5px;padding: 7px 25px;border-radius: 20px;cursor: pointer;box-shadow: 0 0px 22px rgb(120 184 42 / 0.12);font-size: 15px;background: #fff;color: #000;font-weight: normal;}.section .tabbed-content ul li.active a{background: #01447a;color: #fff;}.section4 .row1 h3.section-title-normal{border-radius: 5px;border: 1px solid #e5e5e5;background: #f5f5f5;padding-right: 8px;}.section4 .row1 .section-title-normal span {margin-right: 15px;padding-bottom: 0;border-bottom: none;margin-bottom: -2px;font-size: 18px;font-weight: 700;margin: 0;color: #fff;height: 36px;line-height: 36px;float: left;padding-left: 20px;padding-right: 30px;background: linear-gradient(225deg, transparent 13px, #01447a 0) top right, linear-gradient(315deg, transparent 13px, #01447a 0) bottom right;background-repeat: no-repeat;background-size: 100% 50%;}.section4 .row1 .section-title a {font-size: 14px;font-weight: normal;}.section4 .row1 .section-title i.icon-angle-right {vertical-align: text-bottom;opacity: 1;}.section4 .row1 .section-title-container {margin-bottom: 10px;}.section4 .row1 .cot1 .box-blog-post,.section4 .row1 .cot2 .box-vertical {background: #fff;box-shadow: 0px 1px 15.57px 2.43px rgba(20,64,51,0.05);padding: 10px;}.section4 .row1 .cot1 .box-blog-post .box-text{padding-bottom: 0px;}.section4 .row1 .cot1 .box-blog-post h5{margin-bottom: 5px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;//height: 45px;}.section4 .row1 .cot1 .box-blog-post .from_the_blog_excerpt{display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;height: 69px;}.section4 .row1 .cot2 .box-vertical .box-image{vertical-align: baseline;}.section4 .row1 .cot2 .box-vertical .box-text{padding-top: 0px;padding-left: 10px;padding-right: 0px;padding-bottom: 0px;}.section4 .row1 .cot2 .box-vertical .box-text h5{overflow: hidden;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;}.section4 .row1 .cot2 .box-vertical .box-text .from_the_blog_excerpt{display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}.section4 .row1 .cot2 .col.post-item{padding-bottom: 10px;}.product-small.box span.amount {white-space: nowrap;font-weight: bold;font-size: 15px;font-weight: 700;line-height: 22px;margin-right: 10px;}span.amount{color: #ff1201;}.product-summary .woocommerce-Price-currencySymbol {font-size: 100%;vertical-align: top;margin-top: 0;}.single-product .product-short-description {font-size: 15px;}.product-info .single_add_to_cart_button.button {font-size: 18px;width: 70%;height: 40px;line-height: 40px;border-radius: 6px;margin-bottom: 0px;font-family: 'Quicksand';}.quantity input[type="number"] {box-shadow: none;height: 45px;}.product-summary .quantity {margin-bottom: 0;height: 45px;}.product-info form{margin-bottom: 10px;}.product-info .social-icons a{margin-right: 5px;}h6.entry-category{font-size: 13px;text-transform: capitalize;}h6.entry-category a{color: #0f84c5;}.single-product #product-sidebar{padding-left: 0;margin-top: 30px;}.single-product .row-divided.row-reverse>.col+.col:not(.large-12) {border-right: none;}.product-summary .woocommerce-Price-currencySymbol {font-size: 100%;}.page-right-sidebar .col-divided {border-right: none;}.page-right-sidebar .col-divided+.col {padding-left: 0;}.widget-title, .widgettitle {margin-bottom: 0;background: #01447a;padding: 15px 25px;color: white;display: block;font-family: 'Quicksand';text-align: center;font-size: 18px !important;}.widget ul {margin: 0;border-top-left-radius: 0 !important;border-top-right-radius: 0!important;padding: 0px;box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.3);}.widget ul.menu>li>a,.widget>ul>li>a {padding: 5px 10px;font-weight: bold;}ul.menu>li+li, .widget>ul>li+li{border-top: 1px solid #01447a;}ul.product_list_widget li{padding: 10px 0 5px 80px;}ul.product_list_widget li img{margin-bottom: 0px;border-radius: 50%;margin-left: 10px;}ul.product_list_widget li .star-rating{display: none;}.category-posts-internal .cat-post-item:before {display: none !important;}.category-posts-internal .cat-post-item {border-bottom: none !important;margin: 0 !important;padding: 5px 10px !important;}.category-posts-internal li > div {margin: 0 !important;}.category-posts-internal .cat-post-crop {border-radius: 50%;}.category-posts-internal .cat-post-current .cat-post-title {text-transform: inherit !important;color: #fe0002 !important;line-height: 1.3;padding-top: 15px;}.flatsome_recent_posts .recent-blog-posts{padding: 10px !important;}.flatsome_recent_posts .mr-half {margin-right: 10px;}.flatsome_recent_posts .badge-inner {border-radius: 50%;}.blog-single .large-9.col,.archive.category .large-9.col{max-width: 70%;flex-basis: 70%;padding: 0 10px 10px;}.blog-single .post-sidebar.large-3,.archive.category .post-sidebar.large-3{max-width: 30%;flex-basis: 30%;padding: 0 10px 10px;border-left : none !important;padding-top: 15px;}.blog-single .post-sidebar.large-3{padding-top: 0px;}.article-inner,.comments-area .comment-respond{padding: 20px;box-shadow: 2px 2px 10px #0000001c;border-radius: 10px;background-color: #fff !important;}.archive.category .post-sidebar.large-3{padding-top: 0px;}.blog-archive .box.box-vertical{box-shadow: 0px 0px 30px -15px rgba(0, 0, 0, 0.3);}.blog-archive .box.box-vertical h5{margin-bottom: 8px;}.blog-archive .box.box-vertical .box-image {width: 30% !important;}.blog-archive .box .box-text {vertical-align: top;padding-left: 15px;padding-right: 15px;padding-bottom: 0px;}.blog-archive .box.box-text-bottom{background: #fff;box-shadow: 0px 1px 15.57px 2.43px rgba(20,64,51,0.05);padding: 10px;}.blog-archive .box.box-text-bottom h5{margin-bottom: 5px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;font-size: 19px;}.blog-archive .col.post-item {padding: 0 8px 15px;}.single-product .product-main{padding: 20px;box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.3);margin-bottom: 20px;margin-top: 30px;border-radius: 10px;}.single-product .product-footer{padding: 20px;box-shadow: 0px 0px 30px -10px rgba(0, 0, 0, 0.3);border-radius: 10px;}.product-small .box-image:hover::before,.post-item .box-image:hover::before{-webkit-animation:shine .75s;animation:shine .75s}@-webkit-keyframes shine{100%{left:125%}}@keyframes shine{100%{left:125%}}.product-small .box-image::before,.post-item .box-image::before{position:absolute;top:0;left:-75%;z-index:2;display:block;content:'';width:50%;height:100%;background:-webkit-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 100%);background:linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 100%);-webkit-transform:skewX(-25deg);transform:skewX(-25deg)}div#reviews.woocommerce-Reviews,.devvn_prod_cmt{max-width: 100%;}.woocommerce #reviews #comments h2 {font-size: 20px;color: #01447a;}#comments a.btn-reviews-now,.woocommerce #review_form #respond p.form-submit input#submit, .woocommerce #reviews #comments ol.commentlist #respond p.form-submit input#submit {background-color: #01447a;}span.devvn_num_reviews,span.btn-attach{color: #01447a;}button#devvn_cmt_submit, button#devvn_cmt_replysubmit {background: #01447a;color: #fff;text-transform: capitalize;}.widget .current-cat>a {color: #01447a;}.widget_price_filter form {margin-top: 20px;}.widget_price_filter .ui-slider .ui-slider-handle,.widget_price_filter .ui-slider .ui-slider-range {background-color: #01447a;}#wide-nav .flex-left{width: 80%;}.header-bottom-nav > li.cart-item:hover,.header-bottom-nav > li.account-item:hover{box-shadow: inset 0.2rem 0.2rem 0.5rem #01447a, inset -0.2rem -0.2rem 0.5rem #01447a;border-radius: 10px;}.header-bottom-nav > li.cart-item > a:hover{color: #fff !important;}#commentform input[type='submit']{margin: 0px;}.archive.category h1{font-size: 25px;margin-bottom: 0;color: #01447a;z-index: 999;}.archive-page-header{position: relative;margin-bottom: 10px;padding: 25px 0;background: url(/wp-content/uploads/2017/09/thang.jpg);}.archive-page-header:before{content: "";display: block;background: rgb(0 0 0 / 0.6);z-index: 10;width: 100%;height: 80px;position: absolute;top: 0;}.archive-page-header .col.large-12{padding-bottom: 0px;}.blog-wrapper.blog-archive{padding-top: 20px;}.cart-sidebar .widget-title {border-bottom: none;background: #c0613c;}.cart-wrapper .button[disabled], button[disabled] {opacity: 1;}.product-footer .woocommerce-tabs {border-top: none;}.product-footer .woocommerce-tabs .nav > li > a {font-family: 'Quicksand';font-size: 20px;text-transform: capitalize;padding: 0;color: #01447a;}.product-footer .woocommerce-tabs .nav-line>li.active>a:before{display: none;}.product-section{border-top: none;}.product-section h3{color: #12bd4b;text-transform: capitalize;font-size: 20px;padding: 10px 0;}.header-block-block-1 .row>.col{padding-bottom: 0;}.wpcf7-spinner {display: none;}.box.box-blog-post {border: 1px solid #01447a;}.box.box-blog-post:hover{transform: scale(1.02);box-shadow: 1px 1px 5px #01447a;}.product-main .product-short-description {font-size: 15px;margin-bottom: 15px;border: 1px dashed #1f497d;border-radius: 3px;background: #2279e41a;padding: 10px;margin-top: 15px;}.product-main .product-short-description p{margin-bottom: 5px;}.lightbox-content{box-shadow: 0px 0px 30px 0px #020202;background-color: #063d44;}.form-popup .title-form,.form-popup .des{color: #fff;margin-bottom: 20px;font-size: 23px;text-transform: uppercase;}.form-popup .check-box{padding: 15px;background: #fff;margin-bottom: 15px;}.form-popup input[type=submit]{background: linear-gradient( 240deg, #a9a908, #01ae7f);width: 100%;}.form-popup .wpcf7-list-item {display: block;}.form-popup .wpcf7-list-item label{margin-bottom: 0;}.form-popup .note{color: #ffbc01;font-style: italic;font-size: 16px;}.mfp-close-btn-in .mfp-close {color: #fff;opacity: 1 !important;}.lightbox-content form{margin-bottom: 0;}.section6 .icon-box{border: 1px solid #c1282b;padding: 10px;border-radius: 5px;}.section6 .icon-box-text h3{margin-bottom: 0;}.section6 .icon-box-text h3 a{color: #06458f;}.section6 .icon-box-text h3 a:hover{color: #c1282b;}.section6 .row1 .col.large-12{padding-bottom: 0;}.section6 .row1 .col.large-12 h2 {text-transform: uppercase;font-family: 'Vollkorn', serif;}.section6 .row1{box-shadow: 0px 0px 30px -10px rgb(0 0 0 / 20%);padding: 20px;}/* Custom CSS Mobile */@media (max-width: 549px){.footer-section .row1 .large-3{max-width: 100%;flex-basis: 100%;}.off-canvas-right .mfp-content, .off-canvas-left .mfp-content {width: 100%;background-color: #fff;}.off-canvas .nav-vertical>li>a {padding-top: 10px;padding-bottom: 10px;color: #000;text-transform: capitalize;font-size: 16px;}.blog-single .large-9.col,.archive.category .large-9.col {max-width: 100%;flex-basis: 100%;padding: 0 10px 10px;}.blog-single .post-sidebar.large-3,.archive.category .post-sidebar.large-3 {max-width: 100%;flex-basis: 100%;padding-top: 0;}.box-header h2.box-title {padding: 0 20px;font-size: 17px;}.section1 .row2 .cot1 p, .section2 .row2 .cot1 p,.section2 .row1 .cot1 p{font-size: 14px;margin-bottom: 0px;}.section1 .box-blog-post .box-text{padding-bottom: 0px;}.section1 .box-blog-post .box-text h5{font-size: 17px;}.section2 .row1 .cot1 h2 {margin-bottom: 10px;font-size: 22px;}.section4 .row1 .box-blog-post{display: flex;}.section4 .row1 .box-blog-post .box-image{width: 30% !important;padding-right: 10px;}.section4 .row1 .box-blog-post .box-text {width: 70%;padding-top: 0px;}.section4 .row1 .cot1 .box-blog-post .from_the_blog_excerpt{-webkit-line-clamp: 2;height: 40px;}.section4 .row1 .box-blog-post h5{margin-bottom: 5px;}.section4 .row1 .cot2 .box-vertical .box-text{padding-left: 0px;}.section4 .row1 .cot1 .col.post-item{padding-bottom: 10px;}.single-product .row.row-large .col.large-9{padding: 0 5px 10px;}.single-product .product-main {margin-top: 10px;padding: 10px;}.single-product .product-footer{padding: 10px;}.single-product .product-main .large-6.col{padding-bottom: 10px;}.mua-hang-tiki {background-position-x: 10px;padding: 0 40px;}.product-info {padding-bottom: 0px;}.category-page-row .shop-container .product-small.col{padding: 0 5px 15px;}.article-inner, .comments-area .comment-respond,#comments .comment-respond{padding: 10px;}}.label-new.menu-item > a:after{content:"New";}.label-hot.menu-item > a:after{content:"Hot";}.label-sale.menu-item > a:after{content:"Sale";}.label-popular.menu-item > a:after{content:"Popular";}</style>
+            <style type="text/css" id="wp-custom-css">
+               .hotline3 {
+               position: fixed;
+               left: 10px;
+               bottom: 10px;
+               z-index: 9000;
+               display: block;
+               background: #e71919;
+               color: #fff;
+               padding-top: 5px;
+               padding-bottom: 5px;
+               padding-left: 12px;
+               padding-right: 12px;
+               border-radius: 99px;
+               }
+               .hotline3 .hotline3-number {
+               font-size: 20px;
+               color: #fec901;
+               font-weight: 700;
+               }
+               .hotline3:hover .hotline3-number {
+               color: #fff;
+               }
+               .hotline3:hover{background:#ff7300}
+               .top-tim-kiem h1, .top-tim-kiem h2, .top-tim-kiem h3, .top-tim-kiem h4 {
+               display: inline;
+               }
+               .product_list_widget, .amount span{
+               color: red;
+               font-size: 16px;
+               font-weight: 600;
+               }
+               .article-inner .relative{display:none}
+            </style>
+         </head>
+         <body data-rsssl=1 class="home page-template page-template-page-blank page-template-page-blank-php page page-id-2 theme-flatsome woocommerce-no-js lightbox nav-dropdown-has-arrow nav-dropdown-has-shadow nav-dropdown-has-border">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-dark-grayscale">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0 0.49803921568627" />
+                        <feFuncG type="table" tableValues="0 0.49803921568627" />
+                        <feFuncB type="table" tableValues="0 0.49803921568627" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-grayscale">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0 1" />
+                        <feFuncG type="table" tableValues="0 1" />
+                        <feFuncB type="table" tableValues="0 1" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-purple-yellow">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" />
+                        <feFuncG type="table" tableValues="0 1" />
+                        <feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-blue-red">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0 1" />
+                        <feFuncG type="table" tableValues="0 0.27843137254902" />
+                        <feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-midnight">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0 0" />
+                        <feFuncG type="table" tableValues="0 0.64705882352941" />
+                        <feFuncB type="table" tableValues="0 1" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-magenta-yellow">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0.78039215686275 1" />
+                        <feFuncG type="table" tableValues="0 0.94901960784314" />
+                        <feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-purple-green">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" />
+                        <feFuncG type="table" tableValues="0 1" />
+                        <feFuncB type="table" tableValues="0.44705882352941 0.4" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" >
+               <defs>
+                  <filter id="wp-duotone-blue-orange">
+                     <feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " />
+                     <feComponentTransfer color-interpolation-filters="sRGB" >
+                        <feFuncR type="table" tableValues="0.098039215686275 1" />
+                        <feFuncG type="table" tableValues="0 0.66274509803922" />
+                        <feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" />
+                        <feFuncA type="table" tableValues="1 1" />
+                     </feComponentTransfer>
+                     <feComposite in2="SourceGraphic" operator="in" />
+                  </filter>
+               </defs>
+            </svg>
+            <a class="skip-link screen-reader-text" href="#main">Skip to content</a>  
+            <div id="wrapper">
+              @include('layouts.header.index')
+               @yield('content')
+               @include('.layouts.footer.index')
             </div>
-            <div class="media-content bodycart-mobile">
+            <div id="main-menu" class="mobile-sidebar no-scrollbar mfp-hide">
+               <div class="sidebar-menu no-scrollbar ">
+                  <ul class="nav nav-sidebar nav-vertical nav-uppercase" data-tab="1">
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-5889"><a href="{{route('home')}}" aria-current="page">Trang chủ</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6291"><a href="{{route('aboutUs')}}">Giới thiệu</a></li>
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450">
+                        <a href="#">Sản phẩm</a>
+                        <ul class="sub-menu nav-sidebar-ul children">
+                        @foreach ($categoryProduct as $cate)
+                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6843"><a href="{{route('allListProCate',['cate'=>$cate->slug])}}">{{languageName($cate->name)}}</a></li>
+                        @endforeach
+                        </ul>
+                     </li>
+                     <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450">
+                        <a href="#">Dịch vụ</a>
+                        <ul class="sub-menu nav-sidebar-ul children">
+                        @foreach ($servicehome as $cate)
+                        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6843"><a href="{{route('serviceDetail',['slug'=>$cate->slug])}}">{{$cate->name}}</a></li>
+                        @endforeach
+                        </ul>
+                     </li>
+                     <li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6035"><a href="{{route('listProject')}}">Dự Án</a></li>
+                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41"><a href="{{route('lienHe')}}">Liên hệ</a></li>
+                  </ul>
+               </div>
             </div>
-            <a class="noti-cart-count" href="/cart" title="Giỏ hàng"> Giỏ hàng của bạn hiện có <span
-                    class="count_item_pr"></span> sản phẩm </a>
-            <a title="Đóng" class="cart_btn-close iconclose">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Capa_1" x="0px" y="0px" viewBox="0 0 512.001 512.001"
-                    style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-                    <g>
-                        <g>
-                            <path
-                                d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717    L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859    c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287    l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285    L284.286,256.002z" />
-                        </g>
-                    </g>
-                </svg>
+            <!-- CTA -->
+            <div class="contact-ft">
+            <div class="cta"><a class="zalo" target="_blank" href="{{$setting->zalo}}" title="zalo" ><img src="{{asset('frontend/img/zalo-icon-150.png')}}"></a><span>Chat qua Zalo</span></div>
+            <div class="cta"><a class="mess" target="_blank" href="{{$setting->facebook}}" title="mess" ><img src="{{asset('frontend/img/facebook-icon-150.png')}}"></a><span>Facebook chat</span></div>
+           
+            <a href="tel:{{$setting->phone1}}">
+               <div class="hotline3">
+                  <span class="before-hotline3">Hotline:</span>
+                  <span class="hotline3-number">{{$setting->phone1}}</span>
+               </div>
             </a>
-            <div class="bottom-action">
-                <div class="cart_btn-close tocontinued">
-                    Tiếp tục mua hàng
-                </div>
-                <a href="/checkout" class="checkout">
-                    Thanh toán ngay
-                </a>
-            </div>
-        </div>
-    </div>
-    <div id="quick-view-product" class="quickview-product" style="display:none">
+           
+            <script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+               (function () {
+               	var c = document.body.className;
+               	c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+               	document.body.className = c;
+               })();
+            </script>
+            
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/index.js')}}' id='swv-js'></script>
+            <script type='text/javascript' id='contact-form-7-js-extra'>
+               /* <![CDATA[ */
+               var wpcf7 = {"api":{"root":"https:\/\/smarthomehp.vn\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+               /* ]]> */
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/index.js')}}' id='contact-form-7-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/jquery.blockUI.min.js')}}' id='jquery-blockui-js'></script>
+            <script type='text/javascript' id='wc-add-to-cart-js-extra'>
+               /* <![CDATA[ */
+               var wc_add_to_cart_params = {"ajax_url":"","wc_ajax_url":"","cart_redirect_after_add":"no"};
+               /* ]]> */
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/add-to-cart.min.js')}}' id='wc-add-to-cart-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/js.cookie.min.js')}}' id='js-cookie-js'></script>
+            <script type='text/javascript' id='woocommerce-js-extra'>
+               /* <![CDATA[ */
+               var woocommerce_params = {"ajax_url":"","wc_ajax_url":""};
+               /* ]]> */
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/woocommerce.min.js')}}' id='woocommerce-js'></script>
+            <script type='text/javascript' id='wc-cart-fragments-js-extra'>
+               /* <![CDATA[ */
+               var wc_cart_fragments_params = {"ajax_url":"","wc_ajax_url":"","request_timeout":"5000"};
+               /* ]]> */
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/cart-fragments.min.js')}}' id='wc-cart-fragments-js'>
+
+            </script>
         
-     </div>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+               "use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+            </script>
+            <script type='text/javascript' id='rocket-preload-links-js-extra'>
+               /* <![CDATA[ */
+               var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/thanh-toan\/|\/gio-hang\/|\/tai-khoan\/|\/wc-api\/v(.*)|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/smarthomehp.vn","onHoverDelay":"100","rateThrottle":"3"};
+               /* ]]> */
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+               (function() {
+               "use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+               }());
+            </script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/regenerator-runtime.min.js')}}' id='regenerator-runtime-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/wp-polyfill.min.js')}}' id='wp-polyfill-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/hoverIntent.min.js')}}' id='hoverIntent-js'></script>
+            <script type='text/javascript' id='flatsome-js-js-extra'>
+               /* <![CDATA[ */
+               var flatsomeVars = {"theme":{"version":"3.15.6"},"ajaxurl":"","rtl":"","sticky_height":"70","assets_url":"https:\/\/smarthomehp.vn\/wp-content\/themes\/flatsome\/assets\/js\/","lightbox":{"close_markup":"<button title=\"%title%\" type=\"button\" class=\"mfp-close\"><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"28\" height=\"28\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-x\"><line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"><\/line><line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"><\/line><\/svg><\/button>","close_btn_inside":false},"user":{"can_edit_pages":false},"i18n":{"mainMenu":"Main Menu","toggleButton":"Toggle"},"options":{"cookie_notice_version":"1","swatches_layout":false,"swatches_box_select_event":false,"swatches_box_behavior_selected":false,"swatches_box_update_urls":"1","swatches_box_reset":false,"swatches_box_reset_extent":false,"swatches_box_reset_time":300,"search_result_latency":"0"},"is_mini_cart_reveal":"1"};
+               /* ]]> */
+            </script>
+            
+            <script type="text/javascript" src="{{asset('frontend/js/jquery.min.js')}}"></script>
+            <script type="text/javascript" src="{{asset('frontend/js/jquery-migrate-1.2.1.min.js')}}"></script>
+           
+            @yield('js')
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/flatsome.js')}}' id='flatsome-js-js'></script>
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/woocommerce.js')}}' id='flatsome-theme-woocommerce-js-js'></script>       
+            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/packery.pkgd.min.js')}}' id='flatsome-masonry-js-js'></script>
     
-    <link rel="preload" as="script" href="{{asset('frontend/js/main.js')}}" />
-    <script src="{{asset('frontend/js/main.js')}}" type="text/javascript">
-    </script>
-    @yield('js')
-    {{-- update-cart --}}
-    <script>
-        function btnMinus(e) {
+            <script>
+                        $('.add_cart').click(function(e){
+                           e.preventDefault();  
+                           var id = $(this).data('id');
+                           var url = $(this).data('url');
+                           var quantity = $(this).parent().find('input[name="quantity_pro"]').val();
+                           console.log(quantity);
+                           $.ajax({
+                              type: "POST",
+                              url: url,
+                              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                              data: {'id': id, 'quantity': quantity,},
+                              success: function(data){
+                                 $('#cart-popup').html(data.html1);
+                                 // $('.icon-shopping-bag').html(data.html2);
+                                 $('#cart-popup').show();
+                                 }
+                            })
+                           })
+            </script>
+            <script>
+               function removeItemCart(e) {
+            var id = e
+            var url = $('.remove').data('url');
+            console.log('123');
+            $.ajax({
+                type: 'get',
+                url:url,
+                data: {id:id},
+                success: function(data){
+                                 $('#cart-popup').html(data.html1);
+                                 $('.cart-ajax-new').html(data.html3);
+                                 // $('.icon-shopping-bag').html(data.html2);
+                                 $('#cart-popup').show();
+                                 }
+            })
+        }
+            </script>
+            <script>
+               function btnMinus(e) {
             var id = e;
             var result = document.getElementById('qty'+id); var qtypro = result.value; if( !isNaN( qtypro ) && qtypro > 1 ) result.value--;
             var quantity = result.value;
@@ -199,10 +403,8 @@
                 url:url,
                 data: {id:id, quantity:quantity},
                 success: function(data) {
-                    $('.top-cart-content').html(data.html1);
-                    $('.count_item_pr').html(data.html2);
-                    $('.CartPageContainer').html(data.html3);
-                    $('#popup-cart-desktop').html(data.html4);
+                  $('#cart-popup').html(data.html1);
+                  $('.cart-ajax-new').html(data.html3);
                 }
             })
         }
@@ -211,224 +413,17 @@
             var result = document.getElementById('qty'+id); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;
             var quantity = result.value;
             var url = $('.data-update-cart').data('url');
+            console.log(url);
             $.ajax({
                 type:'get',
                 url:url,
                 data: {id:id, quantity:quantity},
                 success: function(data) {
-                    $('.top-cart-content').html(data.html1);
-                    $('.count_item_pr').html(data.html2);
-                    $('.CartPageContainer').html(data.html3);
-                    $('#popup-cart-desktop').html(data.html4);
+                  $('#cart-popup').html(data.html1);
+                  $('.cart-ajax-new').html(data.html3);
                 }
             })
-        }
-        function removeItemCart(e) {
-            var id = e
-            var url = $('.remove-item-cart').data('url');
-            $.ajax({
-                type: 'get',
-                url:url,
-                data: {id:id},
-                success: function(data) {
-                    $('.top-cart-content').html(data.html1);
-                    $('.count_item_pr').html(data.html2);
-                    $('.CartPageContainer').html(data.html3);
-                    $('.popup-cart-desktop').html(data.html4);
-                }
-            })
-        }
-    </script>
-    {{-- romove-cart-popup --}}
-    <script>
-        function removePopup() {
-            $('#popup-cart-desktop').removeClass('active');
-            $('.backdrop__body-backdrop___1rvky').removeClass('active');
-        }
-        $('.backdrop__body-backdrop___1rvky').click(function() {
-            $('#popup-cart-desktop').removeClass('active');
-            $('.backdrop__body-backdrop___1rvky').removeClass('active');
-        })
-    </script>
-    <div id="sidebar-all" class="d-none">
-        <div class="sidebar-all-wrap-right container" data-type="wishlist">
-            <div class="sidebar-all-wrap-right-main">
-                <div class="sidebar-all-wrap-right-main-list row">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="compare-sidebar">
-        <div class="sidebarAllMainCompare">
-            <div class="sidebarAllHeader">
-                <div class="container">
-                    <div class="title">
-                        <a href='/so-sanh-san-pham' title="Bấm vào đây để tới trang so sánh">
-                            <span>Bấm vào đây để tới trang so sánh</span>
-                        </a>
-                        <span class="closeSidebar">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                viewBox="0 0 14 14" fill="none">
-                                <path d="M12.9996 12.9996L1 1" stroke="#292D32" stroke-width="1.5"
-                                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M13 1.00024L12.25 1.75022M1.00035 12.9999L7.00018 7.00007L9.50037 4.49988"
-                                    stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="sidebarAllBody">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="overplayAll"></div>
-    <div class="icon d-none">
-        <a href="/so-sanh-san-pham" class="wishlist_header" title="So sánh sản phẩm">
-            <svg width="419pt" height="419pt" viewBox="0 -45 419.24 419" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="m359.08 102.91c1.4609 1.5391 3.4766 2.4375 5.6016 2.4844 2.125 0.050781 4.1797-0.75 5.7109-2.2227l46.414-44.898c1.5625-1.5117 2.4414-3.5938 2.4336-5.7656-0.003906-2.1758-0.89453-4.2539-2.4688-5.7539l-46.41-44.41c-3.1953-3.0547-8.2578-2.9414-11.312 0.25-1.4648 1.4922-2.2656 3.5156-2.2188 5.6055 0.046875 2.0898 0.9375 4.0742 2.4688 5.5l32.008 30.426h-64.273c-27.59 0.14453-53.539 13.133-70.191 35.137l-54.852 71.617-79.242-103.46c-1.4961-2.0156-3.8359-3.2305-6.3477-3.2891h-108.4c-4.418 0-8 3.582-8 8 0 4.418 3.582 8 8 8h104.45l79.449 104-79.449 104h-104.45c-4.418 0-8 3.582-8 8 0 4.418 3.582 8 8 8h108.4c2.5195-0.078125 4.8594-1.3086 6.3477-3.3359l79.242-103.41 54.812 71.617c16.66 22.012 42.625 35.004 70.23 35.133h64.273l-32.008 30.426c-2.3555 2.2344-3.1016 5.6875-1.8789 8.6992 1.2227 3.0078 4.1602 4.9648 7.4102 4.9258 2.0625-0.007813 4.043-0.8125 5.5312-2.2461l46.41-44.426c1.5742-1.5039 2.4648-3.5859 2.4688-5.7617 0.007813-2.1758-0.87109-4.2617-2.4336-5.7773l-46.414-44.91c-3.1758-3.0742-8.2422-2.9883-11.312 0.18359-3.0703 3.2539-2.9883 8.3633 0.1875 11.516l32.207 31.371h-64.441c-22.617-0.14062-43.875-10.816-57.5-28.875l-57.461-75.023 57.5-75.227c13.613-18.043 34.855-28.719 57.461-28.875h64.441l-32.207 31.371c-3.1758 3.1094-3.2578 8.1992-0.1875 11.414z" />
-            </svg>
-            <span class="headerCompareCount">0</span>
-        </a>
-    </div>
-    {{-- <link rel="preload"
-        href="//bizweb.dktcdn.net/100/449/923/themes/875305/assets/wishlist-compare.js?1670831590614"
-        as="script">
-    <script src="//bizweb.dktcdn.net/100/449/923/themes/875305/assets/wishlist-compare.js?1670831590614"
-        type="text/javascript"></script> --}}
-    <div id="popupCartModal" class="modal fade" role="dialog"></div>
-    <div class="addThis_listSharing addThis_listing">
-        <div class="addThis_item">
-            <a class="addThis_item-icon" href="tel:0985016662" rel="nofollow" aria-label="phone"
-                title="Gọi ngay cho chúng tôi ">
-                <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="22" cy="22" r="22" fill="url(#paint2_linear)" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M14.0087 9.35552C14.1581 9.40663 14.3885 9.52591 14.5208 9.61114C15.3315 10.148 17.5888 13.0324 18.3271 14.4726C18.7495 15.2949 18.8903 15.9041 18.758 16.3558C18.6214 16.8415 18.3953 17.0971 17.384 17.9109C16.9786 18.239 16.5988 18.5756 16.5391 18.6651C16.3855 18.8866 16.2617 19.3212 16.2617 19.628C16.266 20.3395 16.7269 21.6305 17.3328 22.6232C17.8021 23.3944 18.6428 24.3828 19.4749 25.1413C20.452 26.0361 21.314 26.6453 22.2869 27.1268C23.5372 27.7488 24.301 27.9064 24.86 27.6466C25.0008 27.5826 25.1501 27.4974 25.1971 27.4591C25.2397 27.4208 25.5683 27.0202 25.9268 26.5772C26.618 25.7079 26.7759 25.5674 27.2496 25.4055C27.8513 25.201 28.4657 25.2563 29.0844 25.5716C29.5538 25.8145 30.5779 26.4493 31.2393 26.9095C32.1098 27.5187 33.9703 29.0355 34.2221 29.3381C34.6658 29.8834 34.7427 30.5821 34.4439 31.3534C34.1281 32.1671 32.8992 33.6925 32.0415 34.3444C31.2649 34.9323 30.7145 35.1581 29.9891 35.1922C29.3917 35.222 29.1442 35.1709 28.3804 34.8556C22.3893 32.3887 17.6059 28.7075 13.8081 23.65C11.8239 21.0084 10.3134 18.2688 9.28067 15.427C8.67905 13.7696 8.64921 13.0495 9.14413 12.2017C9.35753 11.8438 10.2664 10.9575 10.9278 10.4633C12.0288 9.64524 12.5365 9.34273 12.9419 9.25754C13.2193 9.19787 13.7014 9.24473 14.0087 9.35552Z"
-                        fill="white" />
-                    <defs>
-                        <linearGradient id="paint2_linear" x1="22" y1="-7.26346e-09" x2="22.1219"
-                            y2="40.5458" gradientUnits="userSpaceOnUse">
-                            <stop offset="50%" stop-color="#e8434c" />
-                            <stop offset="100%" stop-color="#d61114" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="tooltip-text">Gọi ngay cho chúng tôi </span>
-            </a>
-        </div>
-        <div class="addThis_item">
-            <a class="addThis_item-icon" href="https://www.facebook.com/sapo.vn " target="_blank"
-                rel="nofollow noreferrer" aria-label="zalo" title="Chat với chúng tôi qua Zalo ">
-                <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="22" cy="22" r="22" fill="url(#paint4_linear)" />
-                    <g clip-path="url(#clip0)">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M15.274 34.0907C15.7773 34.0856 16.2805 34.0804 16.783 34.0804C16.7806 34.0636 16.7769 34.0479 16.7722 34.0333C16.777 34.0477 16.7808 34.0632 16.7832 34.0798C16.8978 34.0798 17.0124 34.0854 17.127 34.0965H25.4058C26.0934 34.0965 26.7809 34.0977 27.4684 34.0989C28.8434 34.1014 30.2185 34.1039 31.5935 34.0965H31.6222C33.5357 34.0798 35.0712 32.5722 35.0597 30.7209V27.4784C35.0597 27.4582 35.0612 27.4333 35.0628 27.4071C35.0676 27.3257 35.0731 27.2325 35.0368 27.2345C34.9337 27.2401 34.7711 27.2757 34.7138 27.3311C34.2744 27.6145 33.8483 27.924 33.4222 28.2335C32.57 28.8525 31.7179 29.4715 30.7592 29.8817C27.0284 31.0993 23.7287 31.157 20.2265 30.3385C20.0349 30.271 19.9436 30.2786 19.7816 30.292C19.6773 30.3007 19.5436 30.3118 19.3347 30.3068C19.3093 30.3077 19.2829 30.3085 19.2554 30.3093C18.9099 30.3197 18.4083 30.3348 17.8088 30.6877C16.4051 31.1034 14.5013 31.157 13.5175 31.0147C13.522 31.0245 13.5247 31.0329 13.5269 31.0407C13.5236 31.0341 13.5204 31.0275 13.5173 31.0208C13.5036 31.0059 13.4864 30.9927 13.4696 30.98C13.4163 30.9393 13.3684 30.9028 13.46 30.8268C13.4867 30.8102 13.5135 30.7929 13.5402 30.7757C13.5937 30.7412 13.6472 30.7067 13.7006 30.6771C14.4512 30.206 15.1559 29.6905 15.6199 28.9311C16.2508 28.1911 15.9584 27.9025 15.4009 27.3524L15.3799 27.3317C12.6639 24.6504 11.8647 21.8054 12.148 17.9785C12.486 15.8778 13.4829 14.0708 14.921 12.4967C15.7918 11.5433 16.8288 10.7729 17.9632 10.1299C17.9796 10.1198 17.9987 10.1116 18.0182 10.1032C18.0736 10.0793 18.1324 10.0541 18.1408 9.98023C18.1475 9.92191 18.0507 9.90264 18.0163 9.90264C17.3698 9.90264 16.7316 9.89705 16.0964 9.89148C14.8346 9.88043 13.5845 9.86947 12.3041 9.90265C10.465 9.95254 8.78889 11.1779 8.81925 13.3614C8.82689 17.2194 8.82435 21.0749 8.8218 24.9296C8.82053 26.8567 8.81925 28.7835 8.81925 30.7104C8.81925 32.5007 10.2344 34.0028 12.085 34.0749C13.1465 34.1125 14.2107 34.1016 15.274 34.0907ZM13.5888 31.1403C13.5935 31.1467 13.5983 31.153 13.6032 31.1594C13.7036 31.2455 13.8031 31.3325 13.9021 31.4202C13.8063 31.3312 13.7072 31.2423 13.6035 31.1533C13.5982 31.1487 13.5933 31.1444 13.5888 31.1403ZM16.5336 33.8108C16.4979 33.7885 16.4634 33.7649 16.4337 33.7362C16.4311 33.7358 16.4283 33.7352 16.4254 33.7345C16.4281 33.7371 16.4308 33.7397 16.4335 33.7423C16.4632 33.7683 16.4978 33.79 16.5336 33.8108Z"
-                            fill="white" />
-                        <path
-                            d="M17.6768 21.6754C18.5419 21.6754 19.3555 21.6698 20.1633 21.6754C20.6159 21.6809 20.8623 21.8638 20.9081 22.213C20.9597 22.6509 20.6961 22.9447 20.2034 22.9502C19.2753 22.9613 18.3528 22.9558 17.4247 22.9558C17.1554 22.9558 16.8919 22.9669 16.6226 22.9502C16.2903 22.9336 15.9637 22.8671 15.8033 22.5345C15.6429 22.2019 15.7575 21.9026 15.9752 21.631C16.8575 20.5447 17.7455 19.4527 18.6336 18.3663C18.6851 18.2998 18.7367 18.2333 18.7883 18.1723C18.731 18.0781 18.6508 18.1224 18.582 18.1169C17.9633 18.1114 17.3388 18.1169 16.72 18.1114C16.5768 18.1114 16.4335 18.0947 16.296 18.067C15.9695 17.995 15.7689 17.679 15.8434 17.3686C15.895 17.158 16.0669 16.9862 16.2846 16.9363C16.4221 16.903 16.5653 16.8864 16.7085 16.8864C17.7284 16.8809 18.7539 16.8809 19.7737 16.8864C19.9571 16.8809 20.1347 16.903 20.3123 16.9474C20.7019 17.0749 20.868 17.4241 20.7133 17.7899C20.5758 18.1058 20.3581 18.3774 20.1404 18.649C19.3899 19.5747 18.6393 20.4948 17.8888 21.4093C17.8258 21.4814 17.7685 21.5534 17.6768 21.6754Z"
-                            fill="white" />
-                        <path
-                            d="M24.3229 18.7604C24.4604 18.5886 24.6036 18.4279 24.8385 18.3835C25.2911 18.2948 25.7151 18.5775 25.7208 19.021C25.738 20.1295 25.7323 21.2381 25.7208 22.3467C25.7208 22.6349 25.526 22.8899 25.2453 22.973C24.9588 23.0783 24.6322 22.9952 24.4432 22.7568C24.3458 22.6404 24.3057 22.6183 24.1682 22.7236C23.6468 23.1338 23.0567 23.2058 22.4207 23.0063C21.4009 22.6848 20.9827 21.9143 20.8681 20.9776C20.7478 19.9632 21.0973 19.0986 22.0369 18.5664C22.816 18.1175 23.6067 18.1563 24.3229 18.7604ZM22.2947 20.7836C22.3061 21.0275 22.3863 21.2603 22.5353 21.4543C22.8447 21.8534 23.4348 21.9365 23.8531 21.6372C23.9218 21.5873 23.9848 21.5263 24.0421 21.4543C24.363 21.033 24.363 20.3402 24.0421 19.9189C23.8817 19.7027 23.6296 19.5752 23.3603 19.5697C22.7301 19.5309 22.289 20.002 22.2947 20.7836ZM28.2933 20.8168C28.2474 19.3923 29.2157 18.3281 30.5907 18.2893C32.0517 18.245 33.1174 19.1928 33.1632 20.5785C33.209 21.9808 32.321 22.973 30.9517 23.106C29.4563 23.2502 28.2704 22.2026 28.2933 20.8168ZM29.7313 20.6838C29.7199 20.961 29.8058 21.2326 29.9777 21.4598C30.2928 21.8589 30.8829 21.9365 31.2955 21.6261C31.3585 21.5818 31.41 21.5263 31.4616 21.4709C31.7939 21.0496 31.7939 20.3402 31.4673 19.9189C31.3069 19.7083 31.0548 19.5752 30.7855 19.5697C30.1668 19.5364 29.7313 19.991 29.7313 20.6838ZM27.7891 19.7138C27.7891 20.573 27.7948 21.4321 27.7891 22.2912C27.7948 22.6848 27.474 23.0118 27.0672 23.0229C26.9985 23.0229 26.924 23.0174 26.8552 23.0007C26.5688 22.9287 26.351 22.6349 26.351 22.2857V17.8791C26.351 17.6186 26.3453 17.3636 26.351 17.1031C26.3568 16.6763 26.6375 16.3992 27.0615 16.3992C27.4969 16.3936 27.7891 16.6708 27.7891 17.1142C27.7948 17.9789 27.7891 18.8491 27.7891 19.7138Z"
-                            fill="white" />
-                        <path
-                            d="M22.2947 20.7828C22.289 20.0013 22.7302 19.5302 23.3547 19.5634C23.6239 19.5745 23.876 19.702 24.0364 19.9181C24.3573 20.3339 24.3573 21.0322 24.0364 21.4535C23.7271 21.8526 23.1369 21.9357 22.7187 21.6364C22.65 21.5865 22.5869 21.5255 22.5296 21.4535C22.3864 21.2595 22.3062 21.0267 22.2947 20.7828ZM29.7314 20.683C29.7314 19.9957 30.1668 19.5357 30.7856 19.569C31.0549 19.5745 31.307 19.7075 31.4674 19.9181C31.794 20.3394 31.794 21.0544 31.4617 21.4701C31.1408 21.8636 30.545 21.9302 30.1382 21.6198C30.0752 21.5754 30.0236 21.52 29.9778 21.459C29.8059 21.2318 29.7257 20.9602 29.7314 20.683Z"
-                            fill="#0068FF" />
-                    </g>
-                    <defs>
-                        <linearGradient id="paint4_linear" x1="22" y1="0" x2="22"
-                            y2="44" gradientUnits="userSpaceOnUse">
-                            <stop offset="50%" stop-color="#3180f6" />
-                            <stop offset="100%" stop-color="#096de8" />
-                        </linearGradient>
-                        <clipPath id="clip0">
-                            <rect width="26.3641" height="24.2" fill="white"
-                                transform="translate(8.78906 9.90234)" />
-                        </clipPath>
-                    </defs>
-                </svg>
-                <span class="tooltip-text">Chat với chúng tôi qua Zalo </span>
-            </a>
-        </div>
-        <div class="addThis_item">
-            <a class="addThis_item-icon" href="mailto:ndtheme95@gmail.com" aria-label="email"
-                title="Gửi email cho chúng tôi ">
-                <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="22" cy="22" r="22" fill="url(#paint1_linear)" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M11.4589 11.6667H32.5414C33.1621 11.6667 33.6993 11.8861 34.153 12.3245C34.6062 12.7634 34.8332 13.2904 34.8332 13.9064C34.8332 14.6435 34.599 15.3481 34.1319 16.0197C33.6639 16.6914 33.0816 17.2655 32.3846 17.7413C30.0672 19.3131 28.3185 20.4998 27.1311 21.3061C26.4785 21.7489 25.9931 22.0787 25.6817 22.2905C25.6355 22.3222 25.5634 22.3723 25.4675 22.4396C25.3643 22.5117 25.2337 22.6037 25.0729 22.7174C24.7625 22.9368 24.5048 23.114 24.2994 23.2495C24.0938 23.3846 23.8457 23.5363 23.5545 23.7043C23.2631 23.8724 22.9887 23.9983 22.7309 24.0823C22.4731 24.1661 22.2344 24.2082 22.0148 24.2082H22.0006H21.9863C21.7667 24.2082 21.5281 24.1661 21.2702 24.0823C21.0125 23.9983 20.7378 23.8721 20.4466 23.7043C20.1552 23.5363 19.9068 23.385 19.7017 23.2495C19.4964 23.114 19.2386 22.9368 18.9284 22.7174C18.7672 22.6037 18.6366 22.5118 18.5334 22.4393L18.5233 22.4323C18.4325 22.3688 18.3638 22.3208 18.3195 22.2905C17.9197 22.0157 17.4354 21.6846 16.8739 21.3022C16.2152 20.8532 15.4486 20.3329 14.5671 19.7359C12.9342 18.6303 11.9554 17.9654 11.6308 17.7413C11.0388 17.3494 10.4802 16.8107 9.95513 16.1248C9.43011 15.4387 9.16748 14.8018 9.16748 14.214C9.16748 13.4864 9.36539 12.8796 9.76184 12.3944C10.158 11.9095 10.7234 11.6667 11.4589 11.6667ZM33.4002 19.2392C31.4494 20.5296 29.7913 21.6405 28.4258 22.5725L34.8324 28.8337V18.0213C34.4217 18.4695 33.9443 18.8752 33.4002 19.2392ZM9.1665 18.0214C9.58659 18.4788 10.0691 18.8848 10.6132 19.2393C12.6414 20.5863 14.2935 21.6952 15.5757 22.5701L9.1665 28.8335V18.0214ZM34.0421 30.8208C33.6172 31.1883 33.1173 31.3745 32.5403 31.3745H11.4578C10.8809 31.3745 10.3807 31.1883 9.95575 30.8208L17.2287 23.7122C17.4107 23.8399 17.5789 23.9592 17.7306 24.0679C18.2751 24.4597 18.7165 24.7654 19.0556 24.9845C19.3944 25.2041 19.8455 25.4279 20.4091 25.6564C20.9726 25.8853 21.4976 25.9993 21.9847 25.9993H21.9989H22.0132C22.5002 25.9993 23.0253 25.8852 23.5888 25.6564C24.152 25.4279 24.6032 25.2041 24.9423 24.9845C25.2814 24.7654 25.7231 24.4597 26.2672 24.0679C26.427 23.955 26.5961 23.8362 26.7705 23.7141L34.0421 30.8208Z"
-                        fill="white" />
-                    <defs>
-                        <linearGradient id="paint1_linear" x1="22" y1="0" x2="22"
-                            y2="44" gradientUnits="userSpaceOnUse">
-                            <stop offset="50%" stop-color="#22e7f9" />
-                            <stop offset="100%" stop-color="#03d2e4" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <span class="tooltip-text">Gửi email cho chúng tôi </span>
-            </a>
-        </div>
-    </div>
-    <div style="visibility:hidden; position: absolute; z-index: -1; bottom: 0; left: 0;">
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <symbol id="icon-quickview">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 8" fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M6.99929 0.908334C4.86815 0.908334 3.20577 2.12566 1.76033 3.90586C1.71565 3.96089 1.71565 4.03911 1.76033 4.09414C3.20577 5.87434 4.86815 7.09167 6.99929 7.09167C9.13043 7.09167 10.7928 5.87434 12.2383 4.09414C12.2829 4.03911 12.2829 3.96089 12.2383 3.90586C10.7928 2.12566 9.13043 0.908334 6.99929 0.908334ZM1.12634 3.39109C2.63915 1.52791 4.51047 0.0916672 6.99929 0.0916672C9.48812 0.0916672 11.3594 1.52791 12.8722 3.39109C13.1605 3.74608 13.1605 4.25392 12.8722 4.60891C11.3594 6.47209 9.48812 7.90833 6.99929 7.90833C4.51047 7.90833 2.63915 6.47209 1.12634 4.60891C0.838096 4.25392 0.838097 3.74608 1.12634 3.39109Z"
-                        fill="#7B7B7B" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M6.99948 2.95C6.41958 2.95 5.94948 3.4201 5.94948 4C5.94948 4.5799 6.41958 5.05 6.99948 5.05C7.57938 5.05 8.04948 4.5799 8.04948 4C8.04948 3.4201 7.57938 2.95 6.99948 2.95ZM5.13281 4C5.13281 2.96907 5.96855 2.13333 6.99948 2.13333C8.03041 2.13333 8.86615 2.96907 8.86615 4C8.86615 5.03093 8.03041 5.86666 6.99948 5.86666C5.96855 5.86666 5.13281 5.03093 5.13281 4Z"
-                        fill="#7B7B7B" />
-                </svg>
-            </symbol>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <symbol id="icon-wishlist">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 11" fill="none">
-                    <path
-                        d="M1.21763 5.64124C0.581381 3.86545 1.37671 1.60538 3.12641 1.12108C4.08078 0.798209 5.35327 1.12106 5.98952 2.08967C6.62577 1.12106 7.89826 0.798209 8.85263 1.12108C10.7614 1.76682 11.3977 3.86545 10.7614 5.64124C9.96609 8.38563 6.78483 10 5.98952 10C5.19421 9.83856 2.17201 8.54707 1.21763 5.64124Z"
-                        stroke="#7B7B7B" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </symbol>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <symbol id="icon-compare">
-                <svg x="0" y="0" viewBox="0 0 459 459.648"
-                    style="enable-background:new 0 0 512 512">
-                    <path xmlns="http://www.w3.org/2000/svg"
-                        d="m416.324219 293.824219c0 26.507812-21.492188 48-48 48h-313.375l63.199219-63.199219-22.625-22.625-90.511719 90.511719c-6.246094 6.25-6.246094 16.375 0 22.625l90.511719 90.511719 22.625-22.625-63.199219-63.199219h313.375c44.160156-.054688 79.945312-35.839844 80-80v-64h-32zm0 0"
-                        fill="#7B7B7B" data-original="#000000" style=""></path>
-                    <path xmlns="http://www.w3.org/2000/svg"
-                        d="m32.324219 165.824219c0-26.511719 21.488281-48 48-48h313.375l-63.199219 63.199219 22.625 22.625 90.511719-90.511719c6.246093-6.25 6.246093-16.375 0-22.625l-90.511719-90.511719-22.625 22.625 63.199219 63.199219h-313.375c-44.160157.050781-79.949219 35.839843-80 80v64h32zm0 0"
-                        fill="#7B7B7B" data-original="#000000" style=""></path>
-                </svg>
-            </symbol>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <symbol id="icon-viewmore">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 11" fill="none">
-                    <path
-                        d="M12.9764 9.08131C12.7355 9.31672 12.7355 9.70421 12.9764 9.93962C13.2096 10.1675 13.5821 10.1675 13.8153 9.93962L17.8089 6.03635C18.1099 5.74213 18.1099 5.25784 17.8089 4.96362L13.8153 1.06038C13.5821 0.832464 13.2096 0.832464 12.9764 1.06038C12.7355 1.29579 12.7355 1.68328 12.9764 1.91869L15.592 4.47507C15.7522 4.63172 15.6413 4.90386 15.4172 4.90386L1.34615 4.90385C1.01691 4.90385 0.75 5.17076 0.75 5.50001C0.75 5.82925 1.01691 6.09616 1.34615 6.09616L15.4172 6.09617C15.6413 6.09617 15.7522 6.36831 15.5919 6.52496L12.9764 9.08131Z"
-                        fill="url(#paint0_linear_158_2937)" stroke="url(#paint1_linear_158_2937)"
-                        stroke-width="0.5" />
-                    <defs>
-                        <linearGradient id="paint0_linear_158_2937" x1="9.5" y1="10" x2="9.5"
-                            y2="0.999999" gradientUnits="userSpaceOnUse">
-                            <stop offset="0.786458" stop-color="#3A529B" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </symbol>
-        </svg>
-    </div>
-</body>
-</html>
+        }</script>
+         </body>
+      </html>
+     

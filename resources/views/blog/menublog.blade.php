@@ -1,69 +1,35 @@
-<div class="blog_left_base col-lg-3 col-12">
-    <div class="position-sticky">
-       <div class="aside-content aside-content-blog">
-          <div class="title-head">
-             Danh mục tin tức
-          </div>
-          <nav class="nav-category">
-             <ul class="nav navbar-pills">
-                <li class="nav-item  relative">
-                   <a title="Trang chủ" class="nav-link" href="{{route('home')}}">Trang chủ</a>
-                </li>
-                <li class="nav-item  relative">
-                   <a title="Giới thiệu" class="nav-link" href="{{route('aboutUs')}}">Giới thiệu</a>
-                </li>
-               
-                <li class="nav-item  relative">
-                   <a title="Sản phẩm" href="#" class="nav-link pr-5">Sản phẩm</a>
-                   <i class="open_mnu down_icon"></i>
-                   <ul class="menu_down" style="display:none;">
-                      @foreach ($categoryProduct as $cate)
-                      <li class="dropdown-submenu nav-item  relative">
-                         <a title="Điện thoại" class="nav-link pr-5" href="{{route('allListProCate',['cate'=>$cate->slug])}}">{{languageName($cate->name)}}</a>
-                         <i class="open_mnu down_icon"></i>
-                         <ul class="menu_down" style="display:none;">
-                            @foreach ($cate->typeCate as $type)
-                            <li class="nav-item">
-                               <a title="Samsung" class="nav-link pl-4" href="{{route('allListProType',['cate'=>$type->cate_slug,'type'=>$type->slug])}}">{{languageName($type->name)}}</a>
-                            </li>
-                            @endforeach
-                       
-                             
-                            </li>
-                         </ul>
-                      </li>
-                      @endforeach
-                   </ul>
-                </li>    
-            
-                <li class="nav-item active relative">
-                   <a title="Tin tức" class="nav-link" href="{{'allListBlog'}}">Tin tức</a>
-                </li>
-                <li class="nav-item  relative">
-                   <a title="Liên hệ" class="nav-link" href="#">Chính sách đổi trả</a>
-                </li>
-             </ul>
-          </nav>
-       </div>
-       <script>
-          $(".open_mnu").click(function(){
-             $(this).toggleClass('cls_mn').next().slideToggle();
-          });
-       </script>	
-       <div class="blog_noibat">
-          <h2 class="h2_sidebar_blog">
-             <a href="/tin-tuc" title="Tin tức nổi bật">Tin tức nổi bật</a>
-          </h2>
-          <div class="blog_content">
-             @foreach ($news as $blognew)
-             <div class="item clearfix">
-                <div class="contentright">
-                   <h3><a title="{{languageName($blognew->title)}}" href="{{route('detailBlog',['slug'=>$blognew->slug])}}">{{languageName($blognew->title)}}</a></h3>
-                </div>
-             </div>
-             @endforeach
-          
-          </div>
-       </div>
-    </div>
- </div>
+<div class="post-sidebar large-3 col">
+   <div id="secondary" class="widget-area " role="complementary">
+      <aside id="woocommerce_product_categories-2" class="widget woocommerce widget_product_categories">
+         <span class="widget-title "><span>Danh mục sản phẩm</span></span>
+         <div class="is-divider small"></div>
+         <ul class="product-categories">
+            @foreach ($categoryProduct as $cate)
+            <li class="cat-item cat-item-111"><a href="{{route('allListProCate',['cate'=>$cate->slug])}}">{{languageName($cate->name)}}</a></li>
+            @endforeach
+         </ul>
+      </aside>
+      <aside id="flatsome_recent_posts-2" class="widget flatsome_recent_posts">
+         <span class="widget-title "><span>Bài viết mới</span></span>
+         <div class="is-divider small"></div>
+         <ul>
+            @foreach ($hotBlogs as $blog)
+            <li class="recent-blog-posts-li">
+               <div class="flex-row recent-blog-posts align-top pt-half pb-half">
+                  <div class="flex-col mr-half">
+                     <div class="badge post-date  badge-outline">
+                        <div class="badge-inner bg-fill" style="background: url({{$blog->image}}); border:0;">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="flex-col flex-grow limit-text-3">
+                     <a href="{{route('detailBlog',['slug'=>$blog->slug])}}" title="{{languageName($blog->title)}}">{{languageName($blog->title)}}</a>
+                     <span class="post_comments op-7 block is-xsmall"><a href="{{route('detailBlog',['slug'=>$blog->slug])}}#respond"></a></span>
+                  </div>
+               </div>
+            </li>
+            @endforeach
+         </ul>
+      </aside>
+   </div>
+</div>

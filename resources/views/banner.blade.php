@@ -1,0 +1,5 @@
+<div class="img has-hover x md-x lg-x y md-y lg-y mgb-20" >
+  <div class="img-inner image-cover dark" style="padding-top:37%;">
+     <img width="2000" height="761" src="https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner-2000x761.png" class="attachment-medium size-medium" alt="nhà thông minh hải phòng tiên phong banner" decoding="async" loading="lazy" srcset="https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner-2000x761.png 2000w, https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner-768x292.png 768w, https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner-1536x585.png 1536w, https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner-600x228.png 600w, https://smarthomehp.vn/wp-content/uploads/2022/06/nha-thong-minh-so-1-hai-phong-banner.png 2026w" sizes="(max-width: 2000px) 100vw, 2000px" title="Nhà thông minh Hải Phòng 36">						
+  </div>
+</div>

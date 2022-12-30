@@ -54,7 +54,7 @@
 						<div class="logo logo--left ">
 							<h1 class="shop__name">
 								<a href="{{ route('home') }}">
-									Innovac
+								
 								</a>
 							</h1>
 						</div>
@@ -248,7 +248,7 @@
 									<use href="#spinner"></use>
 								</svg>
 							</button>
-							<a href="{{ route('home') }}" class="previous-link">
+							<a href="{{ route('listCart') }}" class="previous-link">
 								<i class="previous-link__arrow">❮</i>
 								<span class="previous-link__content">Quay về giỏ hàng</span>
 							</a>

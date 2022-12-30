@@ -67,7 +67,12 @@ Route::group(['prefix'=>'cong-trinh'], function(){
     Route::get('auth/google/callback', 'GoogleController@handleGoogleCallback');
 
     Route::get('auth/facebook', 'FacebookController@redirectToFacebook')->name('loginFacebook');
-    Route::get('auth/facebook/callback', 'FacebookController@handleFacebookCallback'); 
+    Route::get('auth/facebook/callback', 'FacebookController@handleFacebookCallback');
+    Route::group(['prefix'=>'du-an'], function(){
+        Route::get('/tat-ca.html','ProjectController@listProject')->name('listProject');
+        Route::get('chi-tiet/{slug}.html','ProjectController@detailProject')->name('detailProject');
+    
+    });
     Route::group(['prefix'=>'tin-tuc'], function(){
         Route::get('/tat-ca.html','BlogController@list')->name('allListBlog');
         Route::get('danh-muc/{slug}.html','BlogController@listCateBlog')->name('listCateBlog');

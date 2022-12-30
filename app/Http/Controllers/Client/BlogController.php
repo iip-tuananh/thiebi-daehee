@@ -16,10 +16,10 @@ class BlogController extends Controller
 {
     public function list()
     {
-        $data['blogs'] = Blog::where(['status'=>1])
+        $data['list_blog'] = Blog::where(['status'=>1])
         ->orderBy('id','DESC')
         ->select(['id','title','image','description','updated_at','slug'])
-        ->paginate(10);
+        ->paginate(6);
         $data['news'] = Blog::where(['status'=>1, 'home_status'=>1])->orderBy('id', 'desc')->limit(10)->get(['id', 'title', 'slug', 'image']);
         $data['title_page'] = 'Tất cả tin tức';
         $data['categoryBlog'] = BlogCategory::with([

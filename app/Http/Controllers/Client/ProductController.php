@@ -31,7 +31,7 @@ class ProductController extends Controller
         $data['list'] = Product::where(['status'=>1,'cate_slug'=>$cate])
         ->orderBy('id','DESC')
         ->select('id','category','name','discount','price','images','slug','cate_slug','type_slug', 'size', 'description')
-        ->paginate(16);
+        ->paginate(12);
         $data['cateno'] = Category::where('slug',$cate)->first(['id','name','avatar','content','slug']);
         $allBrands = ProductBrands::where('status', 1)->get();
         $listBrand = [];

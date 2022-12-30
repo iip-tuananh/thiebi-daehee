@@ -22,6 +22,9 @@ use App\models\product\Product;
 use App\models\product\ProductBrands;
 use App\models\product\TypeProduct;
 use App\models\website\Partner;
+use App\models\Project;
+use Illuminate\Pagination\Paginator;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,8 +43,10 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    
     public function boot()
     {
+        Paginator::useBootstrapThree();
         view()->composer('*', function ($view) 
         {
             if(Auth::guard('customer')->user() != null){
@@ -60,12 +65,13 @@ class AppServiceProvider extends ServiceProvider
                     $query->with(['typetwo'])->where('status',1)->orderBy('id','DESC')->select('cate_id','id', 'name','avatar','slug','cate_slug'); 
                 }
             ])->where('status',1)->orderBy('id','asc')->get(['id','name','imagehome','avatar','slug'])->map(function ($query) {
-                $query->setRelation('product', $query->product->where('status', '=', 1)->take(14));
+                $query->setRelation('product', $query->product->where('status', '=', 1)->take(8));
                 return $query;
             });
+           
+            $projects = Project::where('status',1)->get();
             $productBrands = ProductBrands::where('status', 1)->get();
             $bannerAds = BannerAds::where('status',2)->get(['name','image','id']);
-         
             $bannerPhu = Banner::where(['status'=>2])->limit(3)->get(['id','image','link','title','description']);
             $banners = Banner::where(['status'=>1])->get(['id','image','link','title','description']);
             $cartcontent = session()->get('cart', []);
@@ -82,6 +88,7 @@ class AppServiceProvider extends ServiceProvider
             ->where('status',1)
             ->orderBy('id','desc')
             ->get(['id','name','slug','avatar']);
+            $blogs = Blog::where(['status'=>1, 'home_status'=>0])->get(['image','id','title','slug','description']);
             $hotBlogs = Blog::where([
                 'status'=>1, 'home_status'=>1
             ])->orderBy('id','DESC')->get(['id','title','slug','image','description','updated_at']);
@@ -109,6 +116,8 @@ class AppServiceProvider extends ServiceProvider
                 'partners'=>$partners,
                 'bannerPhu'=> $bannerPhu,
                 'typeCate'=> $typeCate,
+                'projects'=>$projects,
+                'blogs' => $blogs,
                 ]);    
         });  
     }
