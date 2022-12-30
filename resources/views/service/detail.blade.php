@@ -16,5 +16,18 @@
 @section('js')
 @endsection
 @section('content')
-ttttttttttttttttttt
+<main id="main" class="container">
+    <div id="content" class="blog-wrapper blog-single page-wrapper">
+       <div class="row container">
+          <div class="large-9 col">
+            <h2>{{$detail_service->name}}</h2>
+            <span><i style="font-size: 11px">{{$detail_service->updated_at->format('d.m.Y')}}</i></span>
+            <br>
+            {!!languageName($detail_service->content)!!}
+          </div>
+          @include('blog.menublog')
+       </div>
+    </div>
+    </main
+
 @endsection

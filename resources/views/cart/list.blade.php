@@ -96,7 +96,7 @@ function removeItem(e) {
                      <div class="col large-7 pb-0 ">
                         <form class="woocommerce-cart-form">
                            <div class="cart-wrapper sm-touch-scroll data-update-cart" data-url="{{route('updateCart')}}">
-                              <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+                              <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents custom-table" cellspacing="0">
                                  <thead>
                                     <tr>
                                        <th class="product-name" colspan="3">Sản phẩm</th>
@@ -117,25 +117,25 @@ function removeItem(e) {
                                           <a class="remove " href="javascript:;" onclick="removeItemCart({{$item['id']}})" data-url="{{route('removeCart')}}">X</a>					
                                        </td>
                                        <td class="product-thumbnail">
-                                          <a href="https://smarthomehp.vn/camera-ezviz-c1c-1080p/"><img width="300" height="200" src="{{$item['image']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="camera 11" decoding="async" loading="lazy" title="Giỏ hàng 1"></a>						
+                                          <a href="{{route('detailProduct',['cate'=>$item['cate_slug'],'slug'=>$item['slug']])}}"><img width="300" height="200" src="{{$item['image']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="camera 11" decoding="async" loading="lazy" title="Giỏ hàng 1"></a>						
                                        </td>
                                        <td class="product-name" data-title="Sản phẩm">
-                                          <a href="https://smarthomehp.vn/camera-ezviz-c1c-1080p/">{{languageName($item['name'])}}</a>							
+                                          <a href="{{route('detailProduct',['cate'=>$item['cate_slug'],'slug'=>$item['slug']])}}">{{languageName($item['name'])}}</a>							
                                           <div class="show-for-small mobile-product-price">
                                              <span class="mobile-product-price__qty">{{$item['quantity']}}</span>
                                              <span class="woocommerce-Price-amount amount"><bdi>{{number_format($item['price'],0,'','.')}}&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></bdi></span>							
                                           </div>
                                        </td>
-                                       <td class="product-price" data-title="Giá">
+                                       <td class="product-price" data-title="Giá" style="text-align: center">
                                           <span class="woocommerce-Price-amount amount"><bdi>{{number_format($item['price'],0,'','.')}}&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></bdi></span>						
                                        </td>
-                                       <td class="product-quantity" data-title="Số lượng">
+                                       <td class="product-quantity" data-title="Số lượng" style="text-align: center">
                                           <div class="quantity buttons_added">
-                                             <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count"  aria-label="-" onclick="btnMinus({{$item['id']}})">
+                                             <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus items-count btn-addqty"  aria-label="-" onclick="btnMinus({{$item['id']}})">
                                                 -
                                                 </button>
-                                                <input type="text" name="updates[]" id="qty{{$item['id']}}"  class="ajaxcart__qty-num number-sidebar" maxlength="3" value="{{$item['quantity']}}" min="0" data-id="" data-line="1" aria-label="quantity" pattern="[0-9]*">
-                                                <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus items-count"  aria-label="+" onclick="btnPlus({{$item['id']}})">
+                                                <input type="text" name="updates[]" id="qty{{$item['id']}}"  class="qty-ctt ajaxcart__qty-num number-sidebar" maxlength="3" value="{{$item['quantity']}}" min="0" data-id="" data-line="1" aria-label="quantity" pattern="[0-9]*">
+                                                <button type="button" class=" btn-addqty ajaxcart__qty-adjust ajaxcart__qty--plus items-count"  aria-label="+" onclick="btnPlus({{$item['id']}})">
                                                 +							
                                                 </button>
                                           </div>

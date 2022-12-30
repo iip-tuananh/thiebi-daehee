@@ -10,7 +10,7 @@
               @foreach ($cart as $item)
               <li class="woocommerce-mini-cart-item mini_cart_item">
                  <a class="remove " href="javascript:;" onclick="removeItemCart({{$item['id']}})" data-url="{{route('removeCart')}}">X</a>
-                 <a href="https://smarthomehp.vn/camera-ezviz-c6n-1080p/">
+                 <a href="{{route('detailProduct',['cate'=>$item['cate_slug'],'slug'=>$item['slug']])}}">
                  <img width="300" height="200" src="{{$item['image']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" loading="lazy">{{languageName($item['name'])}}</a>
                  <span class="quantity">{{$item['quantity']}} × <span class="woocommerce-Price-amount amount"><bdi>{{number_format($item['price'],0,'','.')}}&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></bdi></span></span>				
               </li>       

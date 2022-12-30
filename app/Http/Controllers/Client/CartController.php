@@ -46,12 +46,11 @@ class CartController extends Controller
                     $billdetail->qty = $item['quantity'];
                     $billdetail->images = $item['image'];
                     $billdetail->discount = $item['discount'];
-                    $billdetail->color = $item['color'];
                     $billdetail->save();
                 }
 				DB::commit();
                 $request->session()->forget('cart');
-                return Redirect::to('/')->with('success', 'Gửi đơn hàng thành công');
+                return Redirect::to('/')->with('successBill', 'Gửi đơn hàng thành công');
 			} catch (\Throwable $e) {
 			DB::rollBack();
 			throw $e;
@@ -107,11 +106,13 @@ class CartController extends Controller
         session()->put('cart', $cart);
         $data['cart'] = session()->get('cart',[]);
         $data['cartItemName'] = $cart[$id]['name'];
-        // $view2 = view('cart.count-cart', $data)->render();
+        $view2 = view('cart.count-cart', $data)->render();
         $view1 = view('cart.popup-cart-desktop', $data)->render();
+        $view5 = view('cart.count-cart-mobile', $data)->render();
         return response()->json([
             'html1' => $view1,
-            // 'html2' => $view2,
+            'html2' => $view2,
+            'html5'=> $view5
         ]);
     }
     public function update(Request $request)
@@ -123,13 +124,15 @@ class CartController extends Controller
             $data['cart'] = session()->get('cart',[]);
             $data['cartItemName'] = $cart[$request->id]['name'];
             $view1 = view('cart.popup-cart-desktop', $data)->render();
-               // $view2 = view('cart.count-cart', $data)->render();
+               $view2 = view('cart.count-cart', $data)->render();
             $view3 = view('cart.list-cart-ajax', $data)->render();
+            $view5 = view('cart.count-cart-mobile', $data)->render();
             // $view4 = view('cart.popup-cart-desktop', $data)->render();
             return response()->json([
                 'html1' => $view1,
-                // 'html2' => $view2,
+                'html2' => $view2,
                 'html3' => $view3,
+                'html5' => $view5
                 // 'html4' => $view4
             ]);
         }
@@ -145,12 +148,14 @@ class CartController extends Controller
             }
             $data['cart'] = session()->get('cart',[]);
             $view1 = view('cart.popup-cart-desktop', $data)->render();
-            // $view2 = view('cart.count-cart', $data)->render();
+            $view2 = view('cart.count-cart', $data)->render();
             $view3 = view('cart.list-cart-ajax', $data)->render();
+            $view5 = view('cart.count-cart-mobile', $data)->render();
             return response()->json([
                 'html1' => $view1,
-                // 'html2' => $view2,
-                'html3' => $view3
+                'html2' => $view2,
+                'html3' => $view3,
+                'html5' => $view5
             ]);
         }
     }

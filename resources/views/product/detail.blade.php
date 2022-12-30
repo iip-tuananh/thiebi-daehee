@@ -29,6 +29,7 @@
 @endsection
 @section('content')
     <main id="main" class="">
+       
         <div class="shop-container">
             <div class="container">
                 <div class="woocommerce-notices-wrapper"></div>
@@ -36,7 +37,7 @@
             <div id="product-6994"
                 class="product type-product post-6994 status-publish first instock product_cat-cong-tac-thong-minh has-post-thumbnail shipping-taxable purchasable product-type-simple">
                 <div class="row content-row row-divided row-large row-reverse">
-                    <div id="product-sidebar" class="col large-3 hide-for-medium shop-sidebar ">
+                    <div id="product-sidebar" class="col large-3 hide-for-medium shop-sidebar sidebar-ct">
                         <aside id="woocommerce_product_categories-4" class="widget woocommerce widget_product_categories">
                             <span class="widget-title shop-sidebar">Danh mục sản phẩm</span>
                             <div class="is-divider small"></div>
@@ -207,7 +208,7 @@
                                                     <input type="number" id="quantity_pro" class="input-text qty text" step="1" min="1" max="" name="quantity_pro" value="1" title="SL" size="4" placeholder="" inputmode="numeric" />
                                                     <input type="button" value="+" class="plus button is-form">
                                                 </div>
-                                                <button class="add_cart button alt wp-element-button"
+                                                <button class="add_cart button alt wp-element-button button-custom-new"
                                                     data-url="{{ route('addToCart') }}"
                                                     data-id="{{ $product->id }}">Đặt hàng</button>
                                             </form>

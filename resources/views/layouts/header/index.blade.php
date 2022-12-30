@@ -1,12 +1,13 @@
 <header id="header" class="header ">
    <div class="header-wrapper">
+      
       <div id="masthead" class="header-main hide-for-sticky">
          <div class="header-inner flex-row container logo-left medium-logo-center" role="navigation">
             <!-- Logo -->
             <div id="logo" class="flex-col logo">
                <!-- Header logo -->
-               <a href="{{route('home')}}" title="Công ty TNHH công nghệ viễn thông Tiên Phong - Tư vấn, lắp đặt nhà thông minh HOMEGY chính hãng tại Hải Phòng" rel="home">
-               <img width="700" height="429" src="https://smarthomehp.vn/wp-content/uploads/2022/06/logo-nha-thong-minh-hai-phong.png" class="header_logo header-logo" alt="Công ty TNHH công nghệ viễn thông Tiên Phong"/><img  width="700" height="429" src="https://smarthomehp.vn/wp-content/uploads/2022/06/logo-nha-thong-minh-hai-phong.png" class="header-logo-dark" alt="Công ty TNHH công nghệ viễn thông Tiên Phong"/></a>
+               <a href="{{route('home')}}" title="{{$setting->company}}" rel="home">
+               <img width="700" height="429" src="{{$setting->logo}}" class="header_logo header-logo" alt="{{$setting->company}}"/><img  width="700" height="429" src="{{$setting->logo}}" class="header-logo-dark" alt="{{$setting->company}}"/></a>
             </div>
             <!-- Mobile Left Elements -->
             <div class="flex-col show-for-medium flex-left">
@@ -64,16 +65,22 @@
             </div>
             <!-- Right Elements -->
             <div class="flex-col hide-for-medium flex-right">
-               <ul class="header-nav header-nav-main nav nav-right  nav-uppercase">
+                
+               <ul class="header-nav header-nav-main nav nav-right nav-uppercase cart-all">
+                  @if(count($cartcontent)>0)
+                  <div class="header-count-cart">
+                     <div class="sl-cart">{{count($cartcontent)}}</div>
+                  </div> 
+                  @endif 
                </ul>
             </div>
             <!-- Mobile Right Elements -->
             <div class="flex-col show-for-medium flex-right">
-               <ul class="mobile-nav nav nav-right ">
+               <ul class="mobile-nav nav nav-right cart-all-mobile">
                   <li class="cart-item has-icon">
-                     <a href="https://smarthomehp.vn/gio-hang/" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
+                     <a  class="" data-open="#cart-popup" data-pos="right">
                      <i class="icon-shopping-bag"
-                        data-icon-label="32">
+                        data-icon-label="{{count($cartcontent)}}">
                      </i>
                      </a>
                   </li>
@@ -85,9 +92,9 @@
          <div class="flex-row container">
             <div class="flex-col hide-for-medium flex-left">
                <ul class="nav header-nav header-bottom-nav nav-left  nav-line-bottom nav-uppercase">
-                  <li id="menu-item-5889" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-5889  menu-item-design-default"><a href="{{route('home')}}" aria-current="page" class="nav-top-link">Trang chủ</a></li>
-                  <li id="menu-item-6291" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6291 menu-item-design-default"><a href="{{route('aboutUs')}}" class="nav-top-link">Giới thiệu</a></li>
-                  <li id="menu-item-6450" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450 menu-item-design-default has-dropdown">
+                  <li id="menu-item-5889" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-5889  menu-item-design-default {{Route::currentRouteName() == 'home' ? 'active' : ''}}"><a href="{{route('home')}}" aria-current="page" class="nav-top-link">Trang chủ</a></li>
+                  <li id="menu-item-6291" class="{{Route::currentRouteName() == 'aboutUs' ? 'active' : ''}} menu-item menu-item-type-post_type menu-item-object-page menu-item-6291 menu-item-design-default"><a href="{{route('aboutUs')}}" class="nav-top-link ">Giới thiệu</a></li>
+                  <li id="menu-item-6450" class=" {{Route::currentRouteName() == 'allListProCate' ? 'active' : ''}} menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450 menu-item-design-default has-dropdown">
                      <a  class="nav-top-link">Sản phẩm<i class="icon-angle-down" ></i></a>
                      <ul class="sub-menu nav-dropdown nav-dropdown-default ml-20">
                         @foreach ($categoryProduct as $cate)
@@ -98,31 +105,30 @@
                         @endforeach
                      </ul>
                   </li>
-                  <li id="menu-item-6035" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6035 menu-item-design-default"><a href="{{route('listProject')}}" class="nav-top-link">Dự Án</a></li>
-                  <li id="menu-item-6450" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450 menu-item-design-default has-dropdown">
+                  <li id="menu-item-6035" class=" {{Route::currentRouteName() == 'listProject' ? 'active' : ''}} menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6035 menu-item-design-default"><a href="{{route('listProject')}}" class="nav-top-link">Dự Án</a></li>
+                  <li id="menu-item-6450" class="{{Route::currentRouteName() == 'serviceDetail' ? 'active' : ''}} menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6450 menu-item-design-default has-dropdown">
                      <a  class="nav-top-link cusor-pointer">Dịch vụ<i class="icon-angle-down" ></i></a>
                      <ul class="sub-menu nav-dropdown nav-dropdown-default ml-20">
                         @foreach ($servicehome as $item)
                         <li id="menu-item-6843" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6843">
                            <a class ="menu-cate"href="{{route('serviceDetail',['slug'=>$item->slug])}}">{{$item->name}}</a>
-                      
                         </li>
                         @endforeach
                      </ul>
                   </li>
-                  <li id="menu-item-41" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41 menu-item-design-default"><a href="{{route('lienHe')}}" class="nav-top-link">Liên hệ</a></li>
+                  <li id="menu-item-41" class="{{Route::currentRouteName() == 'lienHe' ? 'active' : ''}} menu-item menu-item-type-post_type menu-item-object-page menu-item-41 menu-item-design-default"><a href="{{route('lienHe')}}" class="nav-top-link">Liên hệ</a></li>
                </ul>
             </div>
             <div class="flex-col hide-for-medium flex-right flex-grow">
                <ul class="nav header-nav header-bottom-nav nav-right  nav-line-bottom nav-uppercase">
                   <li class="cart-item has-icon">
-                     <a href="#" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" title="Giỏ hàng" data-pos="right">
+                     <a href="#" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" data-pos="right">
                      <i class="icon-shopping-bag"
                         data-icon-label="0">
                      </i>
                      </a>
                      <!-- Cart Sidebar Popup -->
-                     <div id="cart-popup" class="mfp-hide widget_shopping_cart">
+                     <div id="cart-popup" class="mfp-hide widget_shopping_cart" >
                         @if (count($cartcontent) > 0)
                         <div class="cart-popup-inner inner-padding">
                             <div class="cart-popup-inner inner-padding">
@@ -135,7 +141,7 @@
                                       @foreach ($cartcontent as $item)
                                       <li class="woocommerce-mini-cart-item mini_cart_item">
                                          <a class="remove " href="javascript:;" onclick="removeItemCart({{$item['id']}})" data-url="{{route('removeCart')}}">X</a>
-                                         <a href="https://smarthomehp.vn/camera-ezviz-c6n-1080p/">
+                                         <a href="{{route('detailProduct',['cate'=>$item['cate_slug'],'slug'=>$item['slug']])}}">
                                          <img width="300" height="200" src="{{$item['image']}}" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" alt="" decoding="async" loading="lazy">{{languageName($item['name'])}}</a>
                                          <span class="quantity">{{$item['quantity']}} × <span class="woocommerce-Price-amount amount"><bdi>{{number_format($item['price'],0,'','.')}}&nbsp;<span class="woocommerce-Price-currencySymbol">đ</span></bdi></span></span>				
                                       </li>       

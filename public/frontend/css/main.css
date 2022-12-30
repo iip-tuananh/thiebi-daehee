@@ -72,7 +72,27 @@ body {
     border-top-left-radius: 10px !important;
     border-top-right-radius: 10px !important;
 }
+.header-count-cart{
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 100;
+    top:40px;
+    
+}
 
+.sl-cart{
+    color: white;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
 .limit-text-3 {
     overflow: hidden;
@@ -121,9 +141,74 @@ body {
 .bg-custom {
     background-color: #e8e8e8 !important;
 }
-
+.bg-custom-white{
+    background-color: white !important;
+}
+.box-header-custom::after{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 30px 25px 30px;
+        border-color: transparent transparent #ffffff transparent  !important;
+        top: 0;
+        right: -45px;
+}
+.box-header-custom::before{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 30px 25px 30px;
+    border-color: transparent transparent #ffffff transparent !important;
+    top: 0;
+    left: -45px;
+}
+.cart-subtotal th{
+    text-align: center !important;
+}
+.order-total th{
+    text-align: center;
+}
+.custom-table tr th{
+    text-align: center !important;
+}
+.qty-ctt{
+    padding-left: 12px !important;
+    padding-right: 0;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    width: 40px !important;
+}
+.hotline3-number{
+    color: rgb(255, 255, 255) !important ;
+}
+.wide-nav{
+    position: sticky ;
+    top: 0px;
+    display: flex;
+}
+.hotline3:hover {
+    background: #00bd10 !important;
+    transition: all 1s;
+}
+.btn-addqty{
+    border-radius: 0;
+    border: 1px solid #e5e5e5;
+    border-color: #e5e5e5;
+    color: #222;
+    line-height: 26px;
+    padding: 0;
+    margin: 0;
+    width: 28px;
+    background-color: #fff;
+    height: 28px;
+    float: left;
+}
 .mgb-20 {
     transform: translateY(-25px) !important;
+}
+.sidebar-ct{
+    margin-top: 50px !important;
 }
 
 .contact-ft {

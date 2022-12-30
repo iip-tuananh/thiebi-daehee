@@ -13,10 +13,8 @@
                    <h3><span style="font-size: 90%;">Dịch vụ {{$setting->company}}</span></h3>
                    <ul>
                       <li><span style="font-size: 90%;"><a href="{{route('home')}}">Trang chủ</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="http://vhb.vn/gioi-thieu/">Về chúng tôi</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="http://vhb.vn/cua-hang/">Sản phẩm</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/lien-he/">Liên hệ hợp tác</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/lien-he/">Liên hệ mua hàng</a></span></li>
+                      <li><span style="font-size: 90%;"><a href="{{route('listProject')}}">Dự Án</a></span></li>
+                      <li><span style="font-size: 90%;"><a href="{{route('lienHe')}}">Liên hệ mua hàng</a></span></li>
                    </ul>
                 </div>
              </div>
@@ -24,11 +22,9 @@
                 <div class="col-inner"  >
                    <h3><span style="font-size: 90%;">Hỗ trợ khách hàng</span></h3>
                    <ul>
-                      <li><span style="font-size: 90%;"><a href="/chinh-sach-van-chuyen/">Chính sách vận chuyển</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/chinh-sach-thanh-toan/">Chính sách thanh toán</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/chinh-sach-bao-hanh/">Chính sách bảo hành</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/chinh-sach-doi-tra-hang/">Chính sách đổi trả hàng</a></span></li>
-                      <li><span style="font-size: 90%;"><a href="/chinh-sach-bao-mat/">Chính sách bảo mật</a></span></li>
+                     @foreach ($servicehome as $item )
+                     <li><span style="font-size: 90%;"><a href="{{route('serviceDetail',['slug'=>$item->slug])}}">{{$item->name}}</a></span></li>
+                     @endforeach
                    </ul>
                 </div>
              </div>

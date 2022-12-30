@@ -32,10 +32,6 @@ Giới thiệu về {{$setting->company}}
             </div>
          </div>
       </div>
-      <button class="tuan">
-         tuan
-      </button>
-      
    </div>
 </main>
 @endsection

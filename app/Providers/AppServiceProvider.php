@@ -73,7 +73,7 @@ class AppServiceProvider extends ServiceProvider
             $productBrands = ProductBrands::where('status', 1)->get();
             $bannerAds = BannerAds::where('status',2)->get(['name','image','id']);
             $bannerPhu = Banner::where(['status'=>2])->limit(3)->get(['id','image','link','title','description']);
-            $banners = Banner::where(['status'=>1])->get(['id','image','link','title','description']);
+            $banners = Banner::where(['status'=>1])->limit(1)->get(['id','image','link','title','description']);
             $cartcontent = session()->get('cart', []);
             $viewold = session()->get('viewoldpro', []);
             $compare = session()->get('compareProduct', []);

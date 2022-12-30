@@ -56,7 +56,7 @@
                :root{--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,161;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}.has-text-align-center{text-align:center}.has-text-align-left{text-align:left}.has-text-align-right{text-align:right}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip:auto!important;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}figure{margin:0 0 1em}
             </style>
             <link rel='stylesheet' id='classic-theme-styles-css' href='{{asset('frontend/css/classic-themes.min.css')}}' type='text/css' media='all' />
-            <link rel='stylesheet' id='contact-form-7-css' href='{{asset('frontend/css/styles.css')}}' type='text/css' media='all' />
+      
             <link rel='stylesheet' id='flatsome-main-css' href='{{asset('frontend/css/flatsome.css')}}' type='text/css' media='all' />
             <style id='flatsome-main-inline-css' type='text/css'>
                @font-face {
@@ -89,6 +89,8 @@
                <style>.woocommerce-product-gallery{ opacity: 1 !important; }</style>
             </noscript>
             <link rel="stylesheet" href="{{asset('frontend/css/main.css')}}">
+            <link rel="stylesheet" href="{{asset('frontend/css/modal-custom.css')}}">
+            
             <link rel="icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-32x32.png" sizes="32x32" />
             <link rel="icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-192x192.png" sizes="192x192" />
             <link rel="apple-touch-icon" href="https://smarthomehp.vn/wp-content/uploads/2022/06/cropped-logo-nha-thong-minh-hai-phong-svc-180x180.png" />
@@ -244,11 +246,36 @@
             </svg>
             <a class="skip-link screen-reader-text" href="#main">Skip to content</a>  
             <div id="wrapper">
+     
+               @if (session()->has('successBill'));
+               <div class="lopgia">
+            <div class="modal-thongbao">
+               <p class="dong-modal">
+                  <i class="fa-solid fa-xmark close-custom"></i>
+                  </p>
+                  <p class="icon-ctt"><img src="{{asset('frontend/img/tichxanh.gif')}}" alt="" srcset=""></p>
+                <p class="nd-modal">Đặt đơn thành công !<br> </p>
+                  
+            </div>
+        </div>
+               @else
+         <div class="lopgia" style="display: none">
+            <div class="modal-thongbao">
+               <p class="dong-modal">
+                  <i class="fa-solid fa-xmark close-custom"></i>
+                  </p>
+                  <p class="icon-ctt"><img src="{{asset('frontend/img/tichxanh.gif')}}" alt="" srcset=""></p>
+                <p class="nd-modal">Thêm sản phẩm vào giỏ hàng thành công !<br> </p>
+                  
+            </div>
+        </div>
+        @endif
               @include('layouts.header.index')
                @yield('content')
                @include('.layouts.footer.index')
             </div>
             <div id="main-menu" class="mobile-sidebar no-scrollbar mfp-hide">
+               
                <div class="sidebar-menu no-scrollbar ">
                   <ul class="nav nav-sidebar nav-vertical nav-uppercase" data-tab="1">
                      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-2 current_page_item menu-item-5889"><a href="{{route('home')}}" aria-current="page">Trang chủ</a></li>
@@ -276,7 +303,7 @@
             </div>
             <!-- CTA -->
             <div class="contact-ft">
-            <div class="cta"><a class="zalo" target="_blank" href="{{$setting->zalo}}" title="zalo" ><img src="{{asset('frontend/img/zalo-icon-150.png')}}"></a><span>Chat qua Zalo</span></div>
+            <div class="cta"><a class="zalo" target="_blank" href="https://zalo.me/{{$setting->phone1}}" title="zalo" ><img src="{{asset('frontend/img/zalo-icon-150.png')}}"></a><span>Chat qua Zalo</span></div>
             <div class="cta"><a class="mess" target="_blank" href="{{$setting->facebook}}" title="mess" ><img src="{{asset('frontend/img/facebook-icon-150.png')}}"></a><span>Facebook chat</span></div>
            
             <a href="tel:{{$setting->phone1}}">
@@ -295,12 +322,8 @@
             </script>
             
             <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/index.js')}}' id='swv-js'></script>
-            <script type='text/javascript' id='contact-form-7-js-extra'>
-               /* <![CDATA[ */
-               var wpcf7 = {"api":{"root":"https:\/\/smarthomehp.vn\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
-               /* ]]> */
-            </script>
-            <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/index.js')}}' id='contact-form-7-js'></script>
+           
+           
             <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/jquery.blockUI.min.js')}}' id='jquery-blockui-js'></script>
             <script type='text/javascript' id='wc-add-to-cart-js-extra'>
                /* <![CDATA[ */
@@ -353,14 +376,15 @@
             <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/flatsome.js')}}' id='flatsome-js-js'></script>
             <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/woocommerce.js')}}' id='flatsome-theme-woocommerce-js-js'></script>       
             <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='{{asset('frontend/js/packery.pkgd.min.js')}}' id='flatsome-masonry-js-js'></script>
-    
+            <script src="{{asset('frontend/js/modal-custom.min.js')}}"></script>
             <script>
                         $('.add_cart').click(function(e){
+                           $("#cart-popup").css('style','display:block');
                            e.preventDefault();  
                            var id = $(this).data('id');
                            var url = $(this).data('url');
                            var quantity = $(this).parent().find('input[name="quantity_pro"]').val();
-                           console.log(quantity);
+                       
                            $.ajax({
                               type: "POST",
                               url: url,
@@ -368,8 +392,9 @@
                               data: {'id': id, 'quantity': quantity,},
                               success: function(data){
                                  $('#cart-popup').html(data.html1);
-                                 // $('.icon-shopping-bag').html(data.html2);
-                                 $('#cart-popup').show();
+                                 $('.cart-all').html(data.html2);
+                                 $('.cart-all-mobile').html(data.html5);
+                             
                                  }
                             })
                            })
@@ -386,7 +411,8 @@
                 success: function(data){
                                  $('#cart-popup').html(data.html1);
                                  $('.cart-ajax-new').html(data.html3);
-                                 // $('.icon-shopping-bag').html(data.html2);
+                                 $('.cart-all').html(data.html2);
+                                 $('.cart-all-mobile').html(data.html5);
                                  $('#cart-popup').show();
                                  }
             })
@@ -404,11 +430,15 @@
                 data: {id:id, quantity:quantity},
                 success: function(data) {
                   $('#cart-popup').html(data.html1);
+                  $('.cart-all').html(data.html2);
+                  $('.cart-all-mobile').html(data.html5);
                   $('.cart-ajax-new').html(data.html3);
+                 
                 }
             })
         }
         function btnPlus(e) {
+       
             var id = e;
             var result = document.getElementById('qty'+id); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;
             var quantity = result.value;
@@ -420,10 +450,33 @@
                 data: {id:id, quantity:quantity},
                 success: function(data) {
                   $('#cart-popup').html(data.html1);
+                  $('.cart-all-mobile').html(data.html5);
+                  $('.cart-all').html(data.html2);
                   $('.cart-ajax-new').html(data.html3);
                 }
             })
         }</script>
+        <script>
+         <script>
+      if (window.innerWidth < 768) {
+      window.onscroll = function() {myFunction()};
+
+      var header = document.getElementById("header-fixed");
+      var headerTop = document.getElementById("top-header");
+      var sticky = header.offsetTop;
+
+      function myFunction() {
+      if (window.pageYOffset > sticky) {
+         header.classList.add("sticky");
+         headerTop.classList.add("hidden");
+      } else {
+         header.classList.remove("sticky");
+         headerTop.classList.remove("hidden");
+      }
+      }
+      }
+   </script>
+         </script>
          </body>
       </html>
      
