@@ -31,7 +31,7 @@
 
                      <div class="entry-header-text entry-header-text-top text-left">
                         <h6 class="entry-category is-xsmall">
-                           <a href="{{route('allListBlog')}}" rel="category tag">Tin tức</a>
+                           <a href="{{route('listProject')}}" rel="category tag">Dự Án</a>
                         </h6>
                         <h1 class="entry-title">{{$blog_detail->name}}</h1>
                         <div class="entry-divider is-divider small"></div>

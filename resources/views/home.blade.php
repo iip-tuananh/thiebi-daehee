@@ -77,7 +77,7 @@
                         @foreach ($hotBlogs as $blog)
                               <div class="col post-item ">
                                  <div class="col-inner pd-20">
-                                    <a href="#" class="plain">
+                                    <a href="{{route('detailBlog',['slug'=>$blog->slug])}}" class="plain">
                                        <div class="box box-normal box-text-bottom box-blog-post has-hover item-border">
                                           <div class="box-image">
                                              <div class="image-cover" style="padding-top:90.25%;">
@@ -132,7 +132,7 @@
                            @endphp
                            <div class="col post-item ">
                               <div class="col-inner pd-20">
-                                 <a href="#" class="plain">
+                                 <a href="{{route('detailProject',['slug'=>$project['slug']])}}" class="plain">
                                     <div class="box box-normal box-text-bottom box-blog-post has-hover item-border">
                                        <div class="box-image">
                                           <div class="image-cover" style="padding-top:90.25%;">
