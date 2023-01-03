@@ -13,7 +13,10 @@
     <link rel='stylesheet' href='{{ asset('frontend/css/owl.theme.default.min.css') }}' type='text/css' />
 @endsection
 @section('js')
-    
+<script src="https://cdn.jsdelivr.net/npm/wow.js@1.1.3/dist/wow.min.js"></script>
+<script>
+   new WOW().init();
+</script>
 @endsection
 @section('content')
 <main id="main" class="">
@@ -24,7 +27,7 @@
          <section class="section section0 pb-3" id="section_979736544">
             <div class="bg section-bg fill bg-fill bg-loaded bg-loaded">
             </div>
-            <div class="section-content relative">
+            <div class="section-content relative ">
                <div class="row row-small row1" id="row-2146003693">
                   @foreach ($bannerPhu as $banner)
                   <div id="" class="col medium-4 small-12 large-4">
@@ -61,7 +64,7 @@
                      <div class="col-inner text-center">
                         <div class="header-pro">
                            <div class="box-header">
-                              <h2 class="box-title">Nhà Thông Minh Daehee</h2>
+                              <h2 class="box-title  wow bounce " data-wow-duration="0.5">Nhà Thông Minh Daehee</h2>
                            </div>
                         </div>
                         <p>Cung cấp toàn bộ giải pháp smart home như phần mềm, thiết bị, cảm biến, camera.</p>
@@ -73,7 +76,7 @@
                      <div class="col-inner text-center">
                         <div class="row large-columns-4 medium-columns-3 small-columns-2 row-small">
                         </div>
-                        <div class="row large-columns-4 medium-columns-1 small-columns-1 slider row-slider slider-nav-simple slider-nav-push" data-flickity-options="{&quot;imagesLoaded&quot;: true, &quot;groupCells&quot;: &quot;100%&quot;, &quot;dragThreshold&quot; : 5, &quot;cellAlign&quot;: &quot;left&quot;,&quot;wrapAround&quot;: true,&quot;prevNextButtons&quot;: true,&quot;percentPosition&quot;: true,&quot;pageDots&quot;: false, &quot;rightToLeft&quot;: false, &quot;autoPlay&quot; : false}">
+                        <div class="row large-columns-4 medium-columns-1 small-columns-1 slider row-slider slider-nav-simple slider-nav-push wow fadeInUp" data-wow-delay="0.5s" data-flickity-options="{&quot;imagesLoaded&quot;: true, &quot;groupCells&quot;: &quot;100%&quot;, &quot;dragThreshold&quot; : 5, &quot;cellAlign&quot;: &quot;left&quot;,&quot;wrapAround&quot;: true,&quot;prevNextButtons&quot;: true,&quot;percentPosition&quot;: true,&quot;pageDots&quot;: false, &quot;rightToLeft&quot;: false, &quot;autoPlay&quot; : false}">
                         @foreach ($hotBlogs as $blog)
                               <div class="col post-item ">
                                  <div class="col-inner pd-20">
@@ -114,7 +117,7 @@
                <div class="row row-small align-center row1" id="row-1273519743">
                   <div id="col-1823573092" class="col cot1 medium-7 small-12 large-7">
                      <div class="col-inner text-center">
-                        <h2>Dự án đã thi công</h2>
+                        <h2 class="wow bounce " data-wow-delay="0.5s">Dự án đã thi công</h2>
                         <p>Danh sách các dự án về smarthome và thiết bị mà nhà thông minh Daehee đang làm.</p>
                      </div>
                   </div>
@@ -122,7 +125,7 @@
                      <div class="col-inner text-center">
                         <div class="row large-columns-4 medium-columns-3 small-columns-2 row-small">
                         </div>
-                        <div class="row large-columns-4 medium-columns-1 small-columns-1 slider row-slider slider-nav-simple slider-nav-push" data-flickity-options="{&quot;imagesLoaded&quot;: true, &quot;groupCells&quot;: &quot;100%&quot;, &quot;dragThreshold&quot; : 5, &quot;cellAlign&quot;: &quot;left&quot;,&quot;wrapAround&quot;: true,&quot;prevNextButtons&quot;: true,&quot;percentPosition&quot;: true,&quot;pageDots&quot;: false, &quot;rightToLeft&quot;: false, &quot;autoPlay&quot; : false}">
+                        <div class="row large-columns-4 medium-columns-1 small-columns-1 slider row-slider slider-nav-simple slider-nav-push wow fadeInLeft " data-wow-duration="0.2" data-flickity-options="{&quot;imagesLoaded&quot;: true, &quot;groupCells&quot;: &quot;100%&quot;, &quot;dragThreshold&quot; : 5, &quot;cellAlign&quot;: &quot;left&quot;,&quot;wrapAround&quot;: true,&quot;prevNextButtons&quot;: true,&quot;percentPosition&quot;: true,&quot;pageDots&quot;: false, &quot;rightToLeft&quot;: false, &quot;autoPlay&quot; : false}">
                
                            @foreach ($projects as $key=>$project)
                            @php
@@ -166,7 +169,7 @@
       @foreach ($categoryProduct as $key => $cate)
       @if (count($cate->product) > 0)
       @if($key %2 == 0)
-         <section class="section section " id="section_1402672276">
+         <section class="section section wow fadeInUp " data-wow-delay="0.5s" id="section_1402672276">
             <div class="bg section-bg fill bg-fill bg-loaded bg-loaded bg-custom">
             </div>
             <div class="section-content relative">
@@ -238,7 +241,7 @@
          </section>
          <div></div>
          @else
-         <section class="section section " id="section_1402672276">
+         <section class="section section  wow fadeInLeft " data-wow-delay="0.5s" id="section_1402672276">
             <div class="bg section-bg fill bg-fill bg-loaded bg-loaded bg-custom-white">
             </div>
             <div class="section-content relative">

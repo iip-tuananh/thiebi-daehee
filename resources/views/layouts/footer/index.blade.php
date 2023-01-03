@@ -10,7 +10,7 @@
           <div class="row row-small row1"  id="row-1277746357">
              <div id="col-1957232624" class="col medium-3 small-6 large-3"  >
                 <div class="col-inner"  >
-                   <h3><span style="font-size: 90%;">Dịch vụ {{$setting->company}}</span></h3>
+                   <h3><span style="font-size: 90%;">{{$setting->company}}</span></h3>
                    <ul>
                       <li><span style="font-size: 90%;"><a href="{{route('home')}}">Trang chủ</a></span></li>
                       <li><span style="font-size: 90%;"><a href="{{route('listProject')}}">Dự Án</a></span></li>
@@ -94,7 +94,7 @@
                              
                             </p>
                             <div class="">
-                               <p><button type="submit">Gửi thông tin</button>
+                               <p><button type="submit color-ct">Gửi thông tin</button>
                                </p>
                             </div>
                          </div>

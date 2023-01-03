@@ -98,7 +98,7 @@
                      <a  class="nav-top-link">Sản phẩm<i class="icon-angle-down" ></i></a>
                      <ul class="sub-menu nav-dropdown nav-dropdown-default ml-20">
                         @foreach ($categoryProduct as $cate)
-                        <li id="menu-item-6843" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6843">
+                        <li id="menu-item-6843" class="menu-ct-new menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-6843">
                            <a class ="menu-cate"href="{{route('allListProCate',['cate'=>$cate->slug])}}">{{languageName($cate->name)}}</a>
                       
                         </li>
@@ -122,7 +122,7 @@
             <div class="flex-col hide-for-medium flex-right flex-grow">
                <ul class="nav header-nav header-bottom-nav nav-right  nav-line-bottom nav-uppercase">
                   <li class="cart-item has-icon">
-                     <a href="#" class="header-cart-link off-canvas-toggle nav-top-link is-small" data-open="#cart-popup" data-class="off-canvas-cart" data-pos="right">
+                     <a href="#" class=" custom-hover" data-open="#cart-popup" data-class="off-canvas-cart" data-pos="right">
                      <i class="icon-shopping-bag"
                         data-icon-label="0">
                      </i>

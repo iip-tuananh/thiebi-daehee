@@ -251,7 +251,7 @@
                                         class="product-section-title container-width product-section-title-related pt-half pb-half uppercase">
                                         Sản phẩm tương tự
                                     </h3>
-                                    <div class="row equalize-box large-columns-4 medium-columns-3 small-columns-2 row-small slider row-slider slider-nav-reveal slider-nav-push"
+                                    <div class="row equalize-box large-columns-4 medium-columns-3 small-columns-2 row-small slider row-slider slider-nav-reveal slider-nav-push wow fadeInUp"
                                         data-flickity-options='{"imagesLoaded": true, "groupCells": "100%", "dragThreshold" : 5, "cellAlign": "left","wrapAround": true,"prevNextButtons": true,"percentPosition": true,"pageDots": false, "rightToLeft": false, "autoPlay" : false}'>
                                         @foreach ($productlq as $pro)
                                             @php
