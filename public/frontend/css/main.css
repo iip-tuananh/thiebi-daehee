@@ -118,6 +118,13 @@ body {
     border-color: transparent #62a438 transparent transparent !important;
   
 }
+.cart--empty-message{
+   text-align: center;
+   padding-bottom: 200px;
+}
+.no-cart{
+    font-size: 20px !important;
+}
 .custom-hover:hover{
     color: #ffffff !important;
 }
