@@ -221,6 +221,7 @@ body {
     -webkit-line-clamp: 3;
     line-clamp: 3;
     -webkit-box-orient: vertical;
+    list-style: none !important;
 }
 
 .box-custom {
