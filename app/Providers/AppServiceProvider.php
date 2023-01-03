@@ -88,10 +88,10 @@ class AppServiceProvider extends ServiceProvider
             ->where('status',1)
             ->orderBy('id','desc')
             ->get(['id','name','slug','avatar']);
-            $blogs = Blog::where(['status'=>1, 'home_status'=>0])->get(['image','id','title','slug','description']);
+            $blogs = Blog::where(['status'=>1, 'home_status'=>0])->limit(3)->get(['image','id','title','slug','description']);
             $hotBlogs = Blog::where([
                 'status'=>1, 'home_status'=>1
-            ])->orderBy('id','DESC')->get(['id','title','slug','image','description','updated_at']);
+            ])->orderBy('id','DESC')->limit(3)->get(['id','title','slug','image','description','updated_at']);
             $hotProduct = Product::where(['status'=>1, 'discountStatus'=>1])->limit(8)->get(['id', 'name', 'cate_slug', 'slug','images','price','discount']);
             $helpCustomer = PageContent::where(['status'=>1,'language'=>'vi', 'type'=>'ho-tro-khach-hang'])->get(['title','slug']);
 

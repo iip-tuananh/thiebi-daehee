@@ -77,19 +77,19 @@
                         <div class="row large-columns-4 medium-columns-3 small-columns-2 row-small">
                         </div>
                         <div class="row large-columns-4 medium-columns-1 small-columns-1 slider row-slider slider-nav-simple slider-nav-push wow fadeInUp" data-wow-delay="0.5s" data-flickity-options="{&quot;imagesLoaded&quot;: true, &quot;groupCells&quot;: &quot;100%&quot;, &quot;dragThreshold&quot; : 5, &quot;cellAlign&quot;: &quot;left&quot;,&quot;wrapAround&quot;: true,&quot;prevNextButtons&quot;: true,&quot;percentPosition&quot;: true,&quot;pageDots&quot;: false, &quot;rightToLeft&quot;: false, &quot;autoPlay&quot; : false}">
-                        @foreach ($hotBlogs as $blog)
+                        @foreach ($servicehome as $blog)
                               <div class="col post-item ">
                                  <div class="col-inner pd-20">
-                                    <a href="{{route('detailBlog',['slug'=>$blog->slug])}}" class="plain">
+                                    <a href="{{route('serviceDetail',['slug'=>$blog->slug])}}" class="plain">
                                        <div class="box box-normal box-text-bottom box-blog-post has-hover item-border">
                                           <div class="box-image">
                                              <div class="image-cover" style="padding-top:90.25%;">
-                                                <img  src="{{$blog->image}}" class="attachment-medium size-medium wp-post-image border-img" alt="he thong giu xe thong minh toi uu hoat dong cua bai giu" decoding="async"   title="{{languageName($blog->title)}}">  							  							  						
+                                                <img  src="{{$blog->image}}" class="attachment-medium size-medium wp-post-image border-img" alt="he thong giu xe thong minh toi uu hoat dong cua bai giu" decoding="async"   title="{{$blog->name}}">  							  							  						
                                              </div>
                                           </div>
                                           <div class="box-text text-center">
                                              <div class="box-text-inner blog-post-inner">
-                                                <h5 class="post-title limit-text-2 ">{{languageName($blog->title)}}</h5>
+                                                <h5 class="post-title limit-text-2 ">{{$blog->name}}</h5>
                                                 <div class="is-divider"></div>
                                                 <p class="from_the_blog_excerpt limit-text-3">{{languageName($blog->description)}}</p>
                                              </div>
