@@ -148,7 +148,7 @@
                                              <h5 class="post-title limit-text-2 ">{{$project['name']}}</h5>
                                              <div class="is-divider"></div>
                                        
-                                             <p class="from_the_blog_excerpt limit-text-3">{{languageName($project['description'])}}</p>
+                                             <p class="from_the_blog_excerpt limit-text-3">{!!languageName($project['description'])!!}</p>
                                           </div>
                                        </div>
                                     </div>

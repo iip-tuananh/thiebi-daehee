@@ -222,7 +222,7 @@ body {
     line-clamp: 3;
     -webkit-box-orient: vertical;
     list-style: none !important;
-    height: 75px;
+    height: 70px;
 }
 .price-wrapper.limit-text-3 ul li {
     list-style: none !important;
