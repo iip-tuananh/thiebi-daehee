@@ -143,7 +143,7 @@
                                           </div>
                                        </div>
                                        <div class="box-text text-center">
-                                          <div class="box-text-inner blog-post-inner">
+                                          <div class="box-text-inner blog-post-inner limit-text-3">
                            
                                              <h5 class="post-title limit-text-2 ">{{$project['name']}}</h5>
                                              <div class="is-divider"></div>
