@@ -94,7 +94,7 @@
                              
                             </p>
                             <div class="">
-                               <p><button type="submit color-ct">Gửi thông tin</button>
+                               <p><button type="submit color-ct" style="background-color: white">Gửi thông tin</button>
                                </p>
                             </div>
                          </div>
