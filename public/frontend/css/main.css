@@ -222,7 +222,15 @@ body {
     line-clamp: 3;
     -webkit-box-orient: vertical;
     list-style: none !important;
-    height: 70px;
+}
+.limit-text-3 p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    list-style: none !important;    
 }
 .price-wrapper.limit-text-3 ul li {
     list-style: none !important;
