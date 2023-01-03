@@ -223,6 +223,9 @@ body {
     -webkit-box-orient: vertical;
     list-style: none !important;
 }
+.price-wrapper.limit-text-3 ul li {
+    list-style: none !important;
+}
 
 .box-custom {
     text-overflow: clip;
