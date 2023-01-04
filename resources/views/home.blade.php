@@ -88,10 +88,10 @@
                                              </div>
                                           </div>
                                           <div class="box-text text-center">
-                                             <div class="box-text-inner blog-post-inner">
+                                             <div class="box-text-inner blog-post-inner limit-text-3">
                                                 <h5 class="post-title limit-text-2 ">{{$blog->name}}</h5>
                                                 <div class="is-divider"></div>
-                                                <p class="from_the_blog_excerpt limit-text-3">{{languageName($blog->description)}}</p>
+                                                <p class="from_the_blog_excerpt limit-text-3">{!!languageName($blog->description)!!}</p>
                                              </div>
                                           </div>
                                        </div>
